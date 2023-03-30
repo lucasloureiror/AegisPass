@@ -1,2 +1,2 @@
 # password-generator
-Offline password generator for users in cloud environment.
+Open-Source password generator for Sysadmin routine.
