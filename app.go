@@ -20,7 +20,7 @@ func main(){
 	} 
 
 	fmt.Println("Password:",password)
-	fmt.Println(string(password[0]))
+	fmt.Println(string(byte(76)))
 	err := clipboard.Init()
 	if err != nil {
 		fmt.Println("Não será possível copiar para o clipboard")
