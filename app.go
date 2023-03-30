@@ -2,30 +2,42 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"strconv"
+
 	"golang.design/x/clipboard"
 )
 
 func main(){
-
-	fmt.Println("Enter password size")
 	var password_size int
-	fmt.Scan(&password_size)
-	
-	var password string
+	var err_convert error
 
-	for i:= 1; i <= password_size; i++{
-		var digit string
-		fmt.Scan(&digit)
-		password = password + digit
-	} 
+	if len(os.Args) < 2 || os.Args[1] == ""{
+		fmt.Println("Enter password size")
+		fmt.Scan(&password_size)
+	} else {
+		password_size,_ = strconv.Atoi(os.Args[1])
 
-	fmt.Println("Password:",password)
-	fmt.Println(string(byte(76)))
-	err := clipboard.Init()
-	if err != nil {
-		fmt.Println("Não será possível copiar para o clipboard")
+		if err_convert != nil{
+			panic("Not able to convert OS Arg to int")
+		}
+
 	}
+	
+	url := fmt.Sprintf("https://www.random.org/strings/?num=1&len=%d&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new", password_size) 
+
+	resp, err_api := http.Get(url)
+
+	if err_api != nil{
+		fmt.Println("Unable to parse random.org API")
+	}
+	password_byte, _ := io.ReadAll(resp.Body)
+
+	password := string(password_byte)
+
+	fmt.Println((string(password)))
 
 	clipboard.Write(clipboard.FmtText,[]byte(password))
-
-}
+	}
