@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"golang.design/x/clipboard"
+	"github.com/lucasloureiror/GoTruePass/internal/generator"
 	"os"
 	"strconv"
-	"github.com/lucasloureiror/GoTruePass/internal/generator"
 )
 
 func main() {
@@ -25,7 +24,5 @@ func main() {
 
 	password := generator.GeneratePass(password_size)
 
-	fmt.Println(password)
-
-	clipboard.Write(clipboard.FmtText, []byte(password))
+	fmt.Print(password)
 }

@@ -1,12 +1,12 @@
 package generator
 
 import (
-	"net/http"
 	"fmt"
 	"io"
+	"net/http"
 )
 
-func retrieveRandom(passwordSize int)(string){
+func retrieveRandom(passwordSize int) string {
 	url := fmt.Sprintf("https://www.random.org/strings/?num=1&len=%d&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new", passwordSize)
 	response, responseError := http.Get(url)
 
@@ -21,7 +21,7 @@ func retrieveRandom(passwordSize int)(string){
 	return responseString
 }
 
-func GeneratePass(passwordSize int)(string) {
+func GeneratePass(passwordSize int) string {
 
 	result := retrieveRandom(passwordSize)
 
