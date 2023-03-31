@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"golang.design/x/clipboard"
-	"io"
-	"net/http"
 	"os"
 	"strconv"
+	"./../internal/generator"
 )
 
 func main() {
@@ -23,20 +22,10 @@ func main() {
 			panic("Not able to convert OS Arg to int")
 		}
 
-	}
+	password := "teste"
 
-	url := fmt.Sprintf("https://www.random.org/strings/?num=1&len=%d&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new", password_size)
-
-	resp, err_api := http.Get(url)
-
-	if err_api != nil {
-		fmt.Println("Unable to parse random.org API")
-	}
-	password_byte, _ := io.ReadAll(resp.Body)
-
-	password := string(password_byte)
-
-	fmt.Println((password))
+	fmt.Println(password)
 
 	clipboard.Write(clipboard.FmtText, []byte(password))
+}
 }

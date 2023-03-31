@@ -1,4 +1,4 @@
-module password_generador
+module GoTruePass
 
 go 1.20
 
