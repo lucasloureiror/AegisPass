@@ -5,7 +5,7 @@ import (
 	"golang.design/x/clipboard"
 	"os"
 	"strconv"
-	"./../internal/generator"
+	"github.com/lucasloureiror/GoTruePass/internal/generator"
 )
 
 func main() {
@@ -16,16 +16,16 @@ func main() {
 		fmt.Println("Enter password size")
 		fmt.Scan(&password_size)
 	} else {
-		password_size, _ = strconv.Atoi(os.Args[1])
+		password_size, err_convert = strconv.Atoi(os.Args[1])
 
 		if err_convert != nil {
 			panic("Not able to convert OS Arg to int")
 		}
+	}
 
-	password := "teste"
+	password := generator.GeneratePass(password_size)
 
 	fmt.Println(password)
 
 	clipboard.Write(clipboard.FmtText, []byte(password))
-}
 }
