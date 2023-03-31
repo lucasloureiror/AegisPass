@@ -22,7 +22,7 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: go build -o ./build/bin/app ./cmd/gotruepass
+      run: go build -o ./build/bin/app ./cmd/aegis
 
     - name: Test
-      run: go test ./cmd/gotruepass
+      run: go test ./cmd/aegis
