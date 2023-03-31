@@ -1,11 +1,19 @@
 # GoTruePass
 
-GoTruePass is a CLI tool that generates true random passwords using the random.org API. With this tool, you can create secure and truly random passwords for your online accounts, providing an extra layer of security.
+GoTruePass is a CLI tool designed for Software Engineers, DevOps Engineers, and Site Reliability Engineers (SRE) to simplify the process of generating true random passwords across various platforms and operating systems. Using the random.org API, GoTruePass enhances the security of your applications and services by creating truly random passwords.
+
+## The Importance of True Random Passwords
+
+True random passwords provide a higher level of security compared to those generated using pseudo-random algorithms. This is because true random passwords are generated from a non-deterministic source, making them more difficult for attackers to predict or guess.
+
+[random.org](https://www.random.org/) is a reputable source of true randomness, generating random numbers from atmospheric noise. This process ensures that the generated passwords are truly random and not influenced by any predictable patterns.
 
 ## Features
 
+- Tailored for Software Engineers, DevOps Engineers, and SREs
 - Generates true random passwords
 - Uses random.org API for randomness
+- Supports various platforms and operating systems
 - Easy-to-use command line interface
 
 ## Prerequisites
