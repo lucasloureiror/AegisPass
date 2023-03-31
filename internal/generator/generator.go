@@ -3,13 +3,12 @@ package generator
 import (
 	"errors"
 	"fmt"
+	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
-
-	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
 func retrieveRandomCharsIndex(passwordSize int) []string {
@@ -25,18 +24,16 @@ func retrieveRandomCharsIndex(passwordSize int) []string {
 
 	responseArray := strings.Split(string(responseByte), "\n")
 
-
-
 	return responseArray
 }
 
 func GeneratePass(passwordSize int) string {
 
-	if (validateSize(&passwordSize)) != nil{
+	if (validateSize(&passwordSize)) != nil {
 		os.Exit(1)
 	}
 
-	charsArray:= shuffle.Shuffle()
+	charsArray := shuffle.Shuffle()
 
 	resultIndexArray := retrieveRandomCharsIndex(passwordSize)
 
@@ -45,27 +42,26 @@ func GeneratePass(passwordSize int) string {
 	return generatedPass
 }
 
-func makeRandomPass(chars[]byte, randomInt[]string, passwordSize int )(string){
+func makeRandomPass(chars []byte, randomInt []string, passwordSize int) string {
 
 	var password string
 	var index int
 
 	for i := 0; i < passwordSize; i++ {
-		index,_ = strconv.Atoi(randomInt[i])
+		index, _ = strconv.Atoi(randomInt[i])
 		password = password + string(chars[index])
 	}
-
 
 	return password
 
 }
 
-func validateSize(passwordSize *int)(error){
-	if *passwordSize < 1 || *passwordSize > 25{
+func validateSize(passwordSize *int) error {
+	if *passwordSize < 1 || *passwordSize > 25 {
 		invalidSize := errors.New("password size must be bigger than 0 and smaller than 25")
 		fmt.Println(invalidSize)
 		return invalidSize
-	}else{
+	} else {
 		return nil
 	}
 }

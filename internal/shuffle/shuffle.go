@@ -1,11 +1,11 @@
 package shuffle
 
-import(
+import (
 	"crypto/rand"
 	"math/big"
 )
 
-func Shuffle()([]byte){
+func Shuffle() []byte {
 
 	allChars := []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
 	arraySize := len(allChars)
