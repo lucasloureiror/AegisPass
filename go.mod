@@ -1,4 +1,4 @@
-module password_generador
+module github.com/lucasloureiror/GoTruePass
 
 go 1.20
 
