@@ -1,6 +1,6 @@
-# GoTruePass
+# AegisPass
 
-GoTruePass is a CLI tool designed for Software Engineers, DevOps Engineers, and Site Reliability Engineers (SRE) to simplify the process of generating true random passwords across various platforms and operating systems. Using the random.org API, GoTruePass enhances the security of your applications and services by creating truly random passwords.
+AegisPass is a CLI tool designed for Software Engineers, DevOps Engineers, and Site Reliability Engineers (SRE) to simplify the process of generating true random passwords across various platforms and operating systems. Using the random.org API, AegisPass enhances the security of your applications and services by creating truly random passwords.
 
 ## The Importance of True Random Passwords
 
@@ -22,18 +22,18 @@ True random passwords provide a higher level of security compared to those gener
 
 ## Building the Project
 
-To build the GoTruePass project, you can use the scripts inside the `/build` folder. Follow these steps:
+To build the AegisPass project, you can use the scripts inside the `/build` folder. Follow these steps:
 
 1. Clone the repository:
 
 ```
-git clone https://github.com/lucasloureiror/GoTruePass.git
+git clone https://github.com/lucasloureiror/AegisPass.git
 ```
 
 2. Change to the project directory:
 
 ```
-cd GoTruePass
+cd AegisPass
 ```
 
 3. Run the appropriate build script for your platform:
@@ -50,11 +50,11 @@ For Windows:
 build\build-windows.cmd
 ```
 
-This will compile the GoTruePass project and create an executable binary in the `build/bin` folder.
+This will compile the AegisPass project and create an executable binary in the `build/bin` folder.
 
 ## Usage
 
-After building the project, you can run the GoTruePass CLI tool using the binary created in the `bin` folder.
+After building the project, you can run the AegisPass CLI tool using the binary created in the `bin` folder.
 
 1. Change to the `bin` directory:
 
@@ -62,18 +62,18 @@ After building the project, you can run the GoTruePass CLI tool using the binary
 cd build/bin
 ```
 
-2. Run the GoTruePass CLI tool:
+2. Run the AegisPass CLI tool:
 
 For Linux or macOS:
 
 ```
-./GoTruePass sizeOfYourPassword
+./aegis sizeOfYourPassword
 ```
 
 For Windows:
 
 ```
-GoTruePass.exe sizeOfYourPassword
+aegis.exe sizeOfYourPassword
 ```
 
 Follow the prompts to generate your true random password.

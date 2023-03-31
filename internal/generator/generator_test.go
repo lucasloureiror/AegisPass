@@ -3,7 +3,7 @@ package generator_test
 import (
 	"testing"
 	"unicode/utf8"
-	"github.com/lucasloureiror/GoTruePass/internal/generator"
+	"github.com/lucasloureiror/AegisPass/internal/generator"
 )
 
 func TestGeneratePassSize(t *testing.T){
