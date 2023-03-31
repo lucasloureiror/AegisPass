@@ -24,5 +24,5 @@ func main() {
 
 	password := generator.GeneratePass(password_size)
 
-	fmt.Print(password)
+	fmt.Println(password)
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 
@@ -31,7 +32,9 @@ func retrieveRandomCharsIndex(passwordSize int) []string {
 
 func GeneratePass(passwordSize int) string {
 
-	validateSize(&passwordSize)
+	if (validateSize(&passwordSize)) != nil{
+		os.Exit(1)
+	}
 
 	charsArray:= shuffle.Shuffle()
 
@@ -57,8 +60,12 @@ func makeRandomPass(chars[]byte, randomInt[]string, passwordSize int )(string){
 
 }
 
-func validateSize(passwordSize *int){
-	if *passwordSize < 1 || *passwordSize > 20{
-		errors.New("Password size is not valid!")
+func validateSize(passwordSize *int)(error){
+	if *passwordSize < 1 || *passwordSize > 25{
+		invalidSize := errors.New("password size must be bigger than 0 and smaller than 25")
+		fmt.Println(invalidSize)
+		return invalidSize
+	}else{
+		return nil
 	}
 }

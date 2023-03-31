@@ -1,25 +1,32 @@
-package generator_test
+package generator
 
 import (
 	"testing"
 	"unicode/utf8"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
 )
 
-func TestGeneratePassSize(t *testing.T){
+func TestGeneratePassWithCorrectSize(t *testing.T){
 	size := 7
-	got := utf8.RuneCountInString(generator.GeneratePass(7))
+	got := utf8.RuneCountInString(GeneratePass(size))
 
-	if got != size + 1{
+	if got != size{
 		t.Errorf("GeneratePass received %d, but returned pass with size %d", 7, got)
 	}
 }
 
-func TestGeneratePassSizeValidate(t *testing.T){
-	size := 7
-	got := utf8.RuneCountInString(generator.GeneratePass(7))
+func TestGenerateInvalidPassSizes(t *testing.T){
+	size := -1
+	got := validateSize(&size)
 
-	if got != size + 1{
-		t.Errorf("GeneratePass received %d, but returned pass with size %d", 7, got)
+	if got == nil{
+		t.Errorf("Expected error, but received none with password size %d", size)
+	}
+
+	size = 26
+
+	got = validateSize(&size)
+
+	if got == nil {
+		t.Errorf("Expected error, but received none with password size %d", size)
 	}
 }
