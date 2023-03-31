@@ -5,10 +5,15 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
+	"strings"
+
+	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
-func retrieveRandom(passwordSize int) string {
-	url := fmt.Sprintf("https://www.random.org/strings/?num=1&len=%d&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new", passwordSize)
+func retrieveRandomCharsIndex(passwordSize int) []string {
+
+	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=68&col=1&base=10&format=plain&rnd=new", passwordSize)
 	response, responseError := http.Get(url)
 
 	if responseError != nil {
@@ -17,18 +22,39 @@ func retrieveRandom(passwordSize int) string {
 
 	responseByte, _ := io.ReadAll(response.Body)
 
-	responseString := string(responseByte)
+	responseArray := strings.Split(string(responseByte), "\n")
 
-	return responseString
+
+
+	return responseArray
 }
 
 func GeneratePass(passwordSize int) string {
 
 	validateSize(&passwordSize)
 
-	result := retrieveRandom(passwordSize)
+	charsArray:= shuffle.Shuffle()
 
-	return result
+	resultIndexArray := retrieveRandomCharsIndex(passwordSize)
+
+	generatedPass := makeRandomPass(charsArray, resultIndexArray, passwordSize)
+
+	return generatedPass
+}
+
+func makeRandomPass(chars[]byte, randomInt[]string, passwordSize int )(string){
+
+	var password string
+	var index int
+
+	for i := 0; i < passwordSize; i++ {
+		index,_ = strconv.Atoi(randomInt[i])
+		password = password + string(chars[index])
+	}
+
+
+	return password
+
 }
 
 func validateSize(passwordSize *int){
