@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -23,7 +24,15 @@ func retrieveRandom(passwordSize int) string {
 
 func GeneratePass(passwordSize int) string {
 
+	validateSize(&passwordSize)
+
 	result := retrieveRandom(passwordSize)
 
 	return result
+}
+
+func validateSize(passwordSize *int){
+	if *passwordSize < 1 || *passwordSize > 20{
+		errors.New("Password size is not valid!")
+	}
 }
