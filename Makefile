@@ -1,11 +1,6 @@
 .DEFAULT_GOAL := build
 
-vet: test
-	go test ./...
-
-.PHONY: vet
-
-fmt: test
+fmt:
 	go fmt ./...
 
 .PHONY: fmt
@@ -24,6 +19,11 @@ build: vet
 	go build -o ../build/bin/aegis ../cmd/aegis
 
 .PHONY: build
+
+test: 
+	go test ./...
+
+.PHONY: test
 
 
 
