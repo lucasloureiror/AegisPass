@@ -16,7 +16,7 @@ run: vet
 .PHONY: build
 
 build: vet
-	go build -o ../build/bin/aegis ../cmd/aegis
+	go build -o ./build/bin/aegis.exe ./cmd/aegis
 
 .PHONY: build
 
