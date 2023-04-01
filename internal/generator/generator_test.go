@@ -31,14 +31,14 @@ func TestGenerateInvalidPassSizes(t *testing.T) {
 	}
 }
 
-func TestMakeRandomPass(t *testing.T){
+func TestMakeRandomPass(t *testing.T) {
 	size := 8
-	chars:= []byte("ab")
-	indexes := []string{"0","0", "0","0", "1", "1", "1", "1"}
-	
+	chars := []byte("ab")
+	indexes := []string{"0", "0", "0", "0", "1", "1", "1", "1"}
+
 	want := "aaaabbbb"
 
-	got := makeRandomPass(chars, indexes, size )
+	got := makeRandomPass(chars, indexes, size)
 
 	if got != want {
 		t.Errorf("Expected result was %s and got %s", got, want)
