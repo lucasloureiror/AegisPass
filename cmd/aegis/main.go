@@ -8,21 +8,21 @@ import (
 )
 
 func main() {
-	var password_size int
-	var err_convert error
+	var pwdSize int
+	var convertErr error
 
 	if len(os.Args) < 2 || os.Args[1] == "" {
 		fmt.Println("Enter password size")
-		fmt.Scan(&password_size)
+		fmt.Scan(&pwdSize)
 	} else {
-		password_size, err_convert = strconv.Atoi(os.Args[1])
+		pwdSize, convertErr = strconv.Atoi(os.Args[1])
 
-		if err_convert != nil {
+		if convertErr != nil {
 			panic("Not able to convert OS Arg to int")
 		}
 	}
 
-	password := generator.GeneratePass(password_size)
+	password := generator.Init(pwdSize)
 
 	fmt.Println(password)
 }

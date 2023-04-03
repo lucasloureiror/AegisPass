@@ -7,18 +7,18 @@ import (
 
 func Shuffle() []byte {
 
-	allChars := []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
-	arraySize := len(allChars)
+	charSet := []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
+	arrSize := len(charSet)
 
-	for i := arraySize - 1; i > 0; i-- {
-		jBigInt, err := rand.Int(rand.Reader, big.NewInt(int64(arraySize)))
+	for i := arrSize - 1; i > 0; i-- {
+		jBigInt, err := rand.Int(rand.Reader, big.NewInt(int64(arrSize)))
 		if err != nil {
 			panic(err)
 		}
 		j := int(jBigInt.Int64())
-		allChars[i], allChars[j] = allChars[j], allChars[i]
+		charSet[i], charSet[j] = charSet[j], charSet[i]
 	}
 
-	return allChars
+	return charSet
 
 }
