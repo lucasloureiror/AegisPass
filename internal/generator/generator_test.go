@@ -7,7 +7,7 @@ import (
 
 func TestGeneratePassWithCorrectSize(t *testing.T) {
 	size := 7
-	got := utf8.RuneCountInString(GeneratePass(size))
+	got := utf8.RuneCountInString(Init(size))
 
 	if got != size {
 		t.Errorf("GeneratePass received %d, but returned pass with size %d", 7, got)

@@ -3,61 +3,47 @@ package generator
 import (
 	"errors"
 	"fmt"
+	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
-	"io"
-	"net/http"
 	"os"
 	"strconv"
-	"strings"
 )
 
-func retrieveRandomCharsIndex(passwordSize int) []string {
+func Init(pwdSize int) string {
 
-	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=68&col=1&base=10&format=plain&rnd=new", passwordSize)
-	response, responseError := http.Get(url)
-
-	if responseError != nil {
-		panic("Error while fetching random.org API")
-	}
-
-	responseByte, _ := io.ReadAll(response.Body)
-
-	responseArray := strings.Split(string(responseByte), "\n")
-
-	return responseArray
-}
-
-func GeneratePass(passwordSize int) string {
-
-	if (validateSize(&passwordSize)) != nil {
+	if (validateSize(&pwdSize)) != nil {
 		os.Exit(1)
 	}
 
-	charsArray := shuffle.Shuffle()
+	apiResponse := make(chan []string)
 
-	resultIndexArray := retrieveRandomCharsIndex(passwordSize)
+	go func() {
+		apiResponse <- randomclient.FetchAPI(pwdSize)
+	}()
 
-	generatedPass := makeRandomPass(charsArray, resultIndexArray, passwordSize)
+	charSet := shuffle.Shuffle()
 
-	return generatedPass
+	pwd := makeRandomPass(charSet, <-apiResponse, pwdSize)
+
+	return pwd
 }
 
-func makeRandomPass(chars []byte, randomInt []string, passwordSize int) string {
+func makeRandomPass(chars []byte, randomInt []string, pwdSize int) string {
 
-	var password string
+	var pwd string
 	var index int
 
-	for i := 0; i < passwordSize; i++ {
+	for i := 0; i < pwdSize; i++ {
 		index, _ = strconv.Atoi(randomInt[i])
-		password = password + string(chars[index])
+		pwd = pwd + string(chars[index])
 	}
 
-	return password
+	return pwd
 
 }
 
-func validateSize(passwordSize *int) error {
-	if *passwordSize < 1 || *passwordSize > 25 {
+func validateSize(pwdSize *int) error {
+	if *pwdSize < 1 || *pwdSize > 25 {
 		invalidSize := errors.New("password size must be bigger than 0 and smaller than 25")
 		fmt.Println(invalidSize)
 		return invalidSize
