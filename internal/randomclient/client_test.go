@@ -1,10 +1,10 @@
 package randomclient
 
-import(
-	"testing"
+import (
+	"io"
 	"net/http"
 	"strings"
-	"io"
+	"testing"
 )
 
 type MockHTTPClient struct{}
@@ -21,16 +21,14 @@ func TestFetchAPI(t *testing.T) {
 
 	pwdSize := 10
 
-	response,err := fetchAPI(mockClient, pwdSize)
+	response, err := fetchAPI(mockClient, pwdSize)
 
 	if err != nil {
 		t.Errorf("Expected error to be nil, but received error %s", err)
 	}
 
-	if len(response) != pwdSize  {
+	if len(response) != pwdSize {
 		t.Errorf("Incorret response from the function, was expecting %d and received %d", pwdSize, len(response))
 	}
-
-
 
 }

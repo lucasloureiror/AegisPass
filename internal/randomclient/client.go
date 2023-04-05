@@ -11,7 +11,7 @@ func Init(pwdSize int) []string {
 
 	client := &http.Client{}
 
-	response,_ := fetchAPI(client, pwdSize)
+	response, _ := fetchAPI(client, pwdSize)
 
 	return response
 }
