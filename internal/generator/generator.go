@@ -2,11 +2,11 @@ package generator
 
 import (
 	"errors"
-	"fmt"
-	"github.com/lucasloureiror/AegisPass/internal/randomclient"
-	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 	"os"
 	"strconv"
+
+	"github.com/lucasloureiror/AegisPass/internal/randomclient"
+	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
 func Init(pwdSize int) string {
@@ -18,7 +18,7 @@ func Init(pwdSize int) string {
 	apiResponse := make(chan []string)
 
 	go func() {
-		apiResponse <- randomclient.FetchAPI(pwdSize)
+		apiResponse <- randomclient.Init(pwdSize)
 	}()
 
 	charSet := shuffle.Shuffle()
@@ -45,7 +45,6 @@ func makeRandomPass(chars []byte, randomInt []string, pwdSize int) string {
 func validateSize(pwdSize *int) error {
 	if *pwdSize < 1 || *pwdSize > 25 {
 		invalidSize := errors.New("password size must be bigger than 0 and smaller than 25")
-		fmt.Println(invalidSize)
 		return invalidSize
 	} else {
 		return nil
