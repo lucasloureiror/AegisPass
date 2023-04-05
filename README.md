@@ -1,14 +1,18 @@
 # AegisPass
 
-AegisPass is a CLI tool designed for Software Engineers, DevOps Engineers, and Site Reliability Engineers (SRE) to simplify the process of generating true random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org API to generate true random passwords, providing enhanced security for your applications and services.
+AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Site Reliability Engineers (SRE) to simplify the process of generating high quality random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org API to generate true random passwords, providing enhanced security for your applications and services.
+
+AegisPass is written in Go and is available for Linux, Windows, and macOS and it does not use anything out of standard library and random.org, in the principle of no-trust, combining both sources of randomness.
 
 ## The Importance of True Random Passwords
 
-True random passwords provide a higher level of security compared to those generated using pseudo-random algorithms. Pseudo-random passwords are generated using deterministic algorithms, which means that if an attacker can determine the initial state of the algorithm or identify patterns in the sequence of generated numbers, they can predict the generated passwords. In contrast, true random passwords are generated from non-deterministic sources, such as cryptographically secure random numbers, making them more difficult for attackers to predict or guess.
+High quality random passwords provide a higher level of security compared to those generated using ordinary pseudo-random algorithms. Pseudo-random passwords are generated using deterministic algorithms, which means that if an attacker can determine the initial state of the algorithm or identify patterns in the sequence of generated numbers, they can predict the generated passwords. In contrast, high quality random passwords are generated from sources that are very hard to predict - if not impossible with current technology, such as cryptographically secure random numbers, making them more difficult for attackers to predict or guess based on the origin of the password.
 
 Cryptographically secure random numbers are generated from sources like the operating system's entropy pool, which collects unpredictable data from various hardware and software events to produce high-quality random numbers. AegisPass leverages cryptographically secure random numbers along with the random.org website to generate true random passwords.
 
-[Random Org](https://www.random.org/) is a reputable source of true randomness, generating random numbers from atmospheric noise. Atmospheric noise is a natural source of randomness that is caused by natural electrical discharges, such as lightning, and radio waves from space. Random.org captures this atmospheric noise through radio receivers and converts it into random numbers. This process ensures that the generated passwords are truly random and not influenced by any predictable patterns.
+[Random Org](https://www.random.org/) is a reputable source of randomness, generating random numbers from atmospheric noise. Atmospheric noise is a natural source of randomness that is caused by natural electrical discharges, such as lightning, and radio waves from space. 
+
+Random.org captures this atmospheric noise through radio receivers and converts it into random numbers. This process ensures that the generated numbers are as random as possible and not influenced by any easily predictable patterns.
 
 
 ## Password Generation Process
