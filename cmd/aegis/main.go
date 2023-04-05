@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/lucasloureiror/AegisPass/internal/config"
 	"github.com/lucasloureiror/AegisPass/internal/generator"
 	"os"
 	"strconv"
@@ -21,6 +22,8 @@ func main() {
 			panic("Not able to convert OS Arg to int")
 		}
 	}
+
+	config.ParseFlags()
 
 	password := generator.Init(pwdSize)
 
