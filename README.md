@@ -49,21 +49,15 @@ git clone https://github.com/lucasloureiror/AegisPass.git
 cd AegisPass
 ```
 
-3. Run the appropriate build script for your platform:
+3. Run the appropriate Makefile:
 
-For Linux or macOS:
-
-```
-./build/build-unix.sh
-```
-
-For Windows:
+For Linux, Windows and macOS:
 
 ```
-build\build-windows.cmd
+make build
 ```
 
-This will compile the AegisPass project and create an executable binary in the `build/bin` folder.
+This will compile the AegisPass project and create an executable binary in the `build/bin` folder called aegis.exe.
 
 ## Usage
 
@@ -77,19 +71,19 @@ cd build/bin
 
 2. Run the AegisPass CLI tool:
 
-For Linux or macOS:
+For Linux or macOS just run the executable with the size of your password as an argument:
 
 ```
-./aegis sizeOfYourPassword
+./aegis.exe 7
 ```
 
 For Windows:
 
 ```
-aegis.exe sizeOfYourPassword
+aegis.exe 7
 ```
 
-Follow the prompts to generate your true random password.
+In this example a password with size of 7 characters will be generated.
 
 ## License
 
