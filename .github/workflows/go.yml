@@ -25,4 +25,4 @@ jobs:
       run: go build -o ./build/bin/app ./cmd/aegis
 
     - name: Test
-      run: go test ./cmd/aegis
+      run: go test ./...
