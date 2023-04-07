@@ -2,16 +2,13 @@ package config
 
 import (
 	"flag"
-	"fmt"
 	"strings"
 )
 
 func ParseFlags(pwd *Password) {
-	numeric := flag.String("numeric", " ", "Password with numbers only")
+	flag.String("numeric", " ", "Password with numbers only")
 
 	flag.Parse()
-
-	fmt.Println(flag.Args(), *numeric)
 
 	for i := range flag.Args() {
 		if strings.Contains(flag.Arg(i), "numeric") {
