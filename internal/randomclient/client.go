@@ -5,13 +5,15 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/lucasloureiror/AegisPass/internal/config"
 )
 
-func Init(pwdSize int) []string {
+func Init(pwd *config.Password) []string {
 
 	client := &http.Client{}
 
-	response, _ := fetchAPI(client, pwdSize)
+	response, _ := fetchAPI(client, pwd)
 
 	return response
 }
@@ -20,9 +22,9 @@ type HTTPClient interface {
 	Get(url string) (resp *http.Response, err error)
 }
 
-func fetchAPI(client HTTPClient, pwdSize int) ([]string, error) {
+func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 
-	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=68&col=1&base=10&format=plain&rnd=new", pwdSize)
+	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=%d&col=1&base=10&format=plain&rnd=new", pwd.Size, len(pwd.CharSet)-1)
 
 	response, responseError := client.Get(url)
 

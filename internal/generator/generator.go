@@ -2,11 +2,13 @@ package generator
 
 import (
 	"errors"
+	"os"
+	"strconv"
+
+	"github.com/lucasloureiror/AegisPass/internal/charsets"
 	"github.com/lucasloureiror/AegisPass/internal/config"
 	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
-	"os"
-	"strconv"
 )
 
 func Init(pwd *config.Password) {
@@ -18,8 +20,10 @@ func Init(pwd *config.Password) {
 	apiResponse := make(chan []string)
 
 	go func() {
-		apiResponse <- randomclient.Init(pwd.Size)
+		apiResponse <- randomclient.Init(pwd)
 	}()
+
+	charsets.Create(pwd)
 
 	shuffle.Shuffle(pwd)
 

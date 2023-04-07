@@ -8,7 +8,6 @@ import (
 
 func Shuffle(pwd *config.Password) {
 
-	pwd.CharSet = []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
 	arrSize := len(pwd.CharSet)
 
 	for i := arrSize - 1; i > 0; i-- {

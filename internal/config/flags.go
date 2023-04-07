@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func ParseFlags() {
+func ParseFlags(pwd *Password) {
 	numeric := flag.String("numeric", " ", "Password with numbers only")
 
 	flag.Parse()
@@ -15,8 +15,8 @@ func ParseFlags() {
 
 	for i := range flag.Args() {
 		if strings.Contains(flag.Arg(i), "numeric") {
-
-			fmt.Println("achei a flag numeric")
+			pwd.UseOnlyNums = true
+			return
 		}
 
 	}

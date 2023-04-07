@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/lucasloureiror/AegisPass/internal/config"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
 	"os"
 	"strconv"
+
+	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/generator"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 		}
 	}
 
-	config.ParseFlags()
+	config.ParseFlags(&pwd)
 
 	generator.Init(&pwd)
 
