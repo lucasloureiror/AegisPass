@@ -20,7 +20,7 @@ func main() {
 		pwd.Size, convertErr = strconv.Atoi(os.Args[1])
 
 		if convertErr != nil {
-			panic("Not able to convert OS Arg to int")
+			panic("Not able to convert OS Arg to int, did you put the number on first argument?")
 		}
 	}
 

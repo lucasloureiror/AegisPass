@@ -19,5 +19,10 @@ func ParseFlags(pwd *Password) {
 			return
 		}
 
+		if strings.Contains(flag.Arg(i), "standard") {
+			pwd.UseStandard = true
+			return
+		}
+
 	}
 }

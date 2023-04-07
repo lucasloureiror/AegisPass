@@ -7,6 +7,7 @@ type Password struct {
 	UseUpper    bool
 	UseSymbols  bool
 	UseStandard bool
+	Offline     bool
 	Generated   string
 	CharSet     []byte
 }
