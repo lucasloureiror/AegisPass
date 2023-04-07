@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/lucasloureiror/AegisPass/internal/config"
 )
 
 type MockHTTPClient struct{}
@@ -18,17 +20,18 @@ func (m *MockHTTPClient) Get(url string) (resp *http.Response, err error) {
 
 func TestFetchAPI(t *testing.T) {
 	mockClient := &MockHTTPClient{}
+	pwd := config.Password{
+		Size: 10,
+	}
 
-	pwdSize := 10
-
-	response, err := fetchAPI(mockClient, pwdSize)
+	response, err := fetchAPI(mockClient, &pwd)
 
 	if err != nil {
 		t.Errorf("Expected error to be nil, but received error %s", err)
 	}
 
-	if len(response) != pwdSize {
-		t.Errorf("Incorret response from the function, was expecting %d and received %d", pwdSize, len(response))
+	if len(response) != pwd.Size {
+		t.Errorf("Incorret response from the function, was expecting %d and received %d", pwd.Size, len(response))
 	}
 
 }

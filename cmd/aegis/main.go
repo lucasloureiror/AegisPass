@@ -2,27 +2,31 @@ package main
 
 import (
 	"fmt"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
 	"os"
 	"strconv"
+
+	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/generator"
 )
 
 func main() {
-	var pwdSize int
+	var pwd config.Password
 	var convertErr error
 
 	if len(os.Args) < 2 || os.Args[1] == "" {
 		fmt.Println("Enter password size")
-		fmt.Scan(&pwdSize)
+		fmt.Scan(&pwd.Size)
 	} else {
-		pwdSize, convertErr = strconv.Atoi(os.Args[1])
+		pwd.Size, convertErr = strconv.Atoi(os.Args[1])
 
 		if convertErr != nil {
-			panic("Not able to convert OS Arg to int")
+			panic("Not able to convert OS Arg to int, did you put the number on first argument?")
 		}
 	}
 
-	password := generator.Init(pwdSize)
+	config.ParseFlags(&pwd)
 
-	fmt.Println(password)
+	generator.Init(&pwd)
+
+	fmt.Println(pwd.Generated)
 }

@@ -5,40 +5,40 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/lucasloureiror/AegisPass/internal/charsets"
+	"github.com/lucasloureiror/AegisPass/internal/config"
 	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
-func Init(pwdSize int) string {
+func Init(pwd *config.Password) {
 
-	if (validateSize(&pwdSize)) != nil {
+	if (validateSize(&pwd.Size)) != nil {
 		os.Exit(1)
 	}
 
 	apiResponse := make(chan []string)
 
 	go func() {
-		apiResponse <- randomclient.Init(pwdSize)
+		apiResponse <- randomclient.Init(pwd)
 	}()
 
-	charSet := shuffle.Shuffle()
+	charsets.Create(pwd)
 
-	pwd := makeRandomPass(charSet, <-apiResponse, pwdSize)
+	shuffle.Shuffle(pwd)
 
-	return pwd
+	makeRandomPass(pwd, <-apiResponse)
+
 }
 
-func makeRandomPass(chars []byte, randomInt []string, pwdSize int) string {
+func makeRandomPass(pwd *config.Password, randomInt []string) {
 
-	var pwd string
 	var index int
 
-	for i := 0; i < pwdSize; i++ {
+	for i := 0; i < pwd.Size; i++ {
 		index, _ = strconv.Atoi(randomInt[i])
-		pwd = pwd + string(chars[index])
+		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
 	}
-
-	return pwd
 
 }
 
