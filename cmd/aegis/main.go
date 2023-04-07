@@ -9,14 +9,14 @@ import (
 )
 
 func main() {
-	var pwdSize int
+	var pwd config.Password
 	var convertErr error
 
 	if len(os.Args) < 2 || os.Args[1] == "" {
 		fmt.Println("Enter password size")
-		fmt.Scan(&pwdSize)
+		fmt.Scan(&pwd.Size)
 	} else {
-		pwdSize, convertErr = strconv.Atoi(os.Args[1])
+		pwd.Size, convertErr = strconv.Atoi(os.Args[1])
 
 		if convertErr != nil {
 			panic("Not able to convert OS Arg to int")
@@ -25,7 +25,7 @@ func main() {
 
 	config.ParseFlags()
 
-	password := generator.Init(pwdSize)
+	generator.Init(&pwd)
 
-	fmt.Println(password)
+	fmt.Println(pwd.Generated)
 }

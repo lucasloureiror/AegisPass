@@ -2,30 +2,29 @@ package generator
 
 import (
 	"errors"
-	"os"
-	"strconv"
-
+	"github.com/lucasloureiror/AegisPass/internal/config"
 	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
+	"os"
+	"strconv"
 )
 
-func Init(pwdSize int) string {
+func Init(pwd *config.Password) {
 
-	if (validateSize(&pwdSize)) != nil {
+	if (validateSize(&pwd.Size)) != nil {
 		os.Exit(1)
 	}
 
 	apiResponse := make(chan []string)
 
 	go func() {
-		apiResponse <- randomclient.Init(pwdSize)
+		apiResponse <- randomclient.Init(pwd.Size)
 	}()
 
 	charSet := shuffle.Shuffle()
 
-	pwd := makeRandomPass(charSet, <-apiResponse, pwdSize)
+	pwd.Generated = makeRandomPass(charSet, <-apiResponse, pwd.Size)
 
-	return pwd
 }
 
 func makeRandomPass(chars []byte, randomInt []string, pwdSize int) string {

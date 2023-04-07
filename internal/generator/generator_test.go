@@ -1,15 +1,20 @@
 package generator
 
 import (
+	"github.com/lucasloureiror/AegisPass/internal/config"
 	"testing"
 	"unicode/utf8"
 )
 
 func TestGeneratePassWithCorrectSize(t *testing.T) {
-	size := 7
-	got := utf8.RuneCountInString(Init(size))
+	pwd := config.Password{
+		Size: 7,
+	}
 
-	if got != size {
+	Init(&pwd)
+	got := utf8.RuneCountInString(pwd.Generated)
+
+	if got != pwd.Size {
 		t.Errorf("GeneratePass received %d, but returned pass with size %d", 7, got)
 	}
 }
