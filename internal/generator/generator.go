@@ -21,23 +21,20 @@ func Init(pwd *config.Password) {
 		apiResponse <- randomclient.Init(pwd.Size)
 	}()
 
-	charSet := shuffle.Shuffle()
+	shuffle.Shuffle(pwd)
 
-	pwd.Generated = makeRandomPass(charSet, <-apiResponse, pwd.Size)
+	makeRandomPass(pwd, <-apiResponse)
 
 }
 
-func makeRandomPass(chars []byte, randomInt []string, pwdSize int) string {
+func makeRandomPass(pwd *config.Password, randomInt []string) {
 
-	var pwd string
 	var index int
 
-	for i := 0; i < pwdSize; i++ {
+	for i := 0; i < pwd.Size; i++ {
 		index, _ = strconv.Atoi(randomInt[i])
-		pwd = pwd + string(chars[index])
+		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
 	}
-
-	return pwd
 
 }
 

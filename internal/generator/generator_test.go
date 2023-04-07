@@ -37,13 +37,17 @@ func TestGenerateInvalidPassSizes(t *testing.T) {
 }
 
 func TestMakeRandomPass(t *testing.T) {
-	size := 8
-	chars := []byte("ab")
+	pwd := config.Password{
+		Size:    8,
+		CharSet: []byte("ab"),
+	}
 	indexes := []string{"0", "0", "0", "0", "1", "1", "1", "1"}
 
 	want := "aaaabbbb"
 
-	got := makeRandomPass(chars, indexes, size)
+	makeRandomPass(&pwd, indexes)
+
+	got := pwd.Generated
 
 	if got != want {
 		t.Errorf("Expected result was %s and got %s", got, want)
