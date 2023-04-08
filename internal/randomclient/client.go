@@ -3,6 +3,7 @@ package randomclient
 import (
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"strings"
 
@@ -30,6 +31,10 @@ func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 
 	if responseError != nil {
 		fmt.Println("Error while fetching random.org API")
+
+		if netErr, ok := responseError.(net.Error); ok && netErr.Timeout() {
+			fmt.Println("The server seems to be offline.")
+		}
 		return nil, responseError
 	}
 
