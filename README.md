@@ -74,21 +74,39 @@ After building the project, you can run the AegisPass CLI tool using the binary 
 cd build/bin
 ```
 
-2. Run the AegisPass CLI tool:
+2. Running the AegisPass CLI tool:
 
-For Linux or macOS just run the executable with the size of your password as an argument:
+For Linux or macOS just run the executable with help to see the usage instructions:
 
 ```
-./aegis.exe 7
+./aegis.exe help
 ```
 
 For Windows:
 
 ```
-aegis.exe 7
+aegis.exe help
 ```
 
-In this example a password with size of 7 characters will be generated.
+The following help message will be displayed:
+
+```
+Usage: aegis [password_length] [options]
+
+Arguments:
+  password_length  The length of the password to be generated (default: 10)
+
+Options:
+  --numeric        Password with numbers only (default: password with length 10 if not specified)
+  --credits        Print random.org API credits to the user after generating a password
+  help           Help the user to use the CLI tool
+
+Example:
+  aegis 12 --numeric
+  aegis 8
+  aegis 10 --credits
+  aegis help
+```
 
 ## License
 
