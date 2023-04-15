@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 
@@ -15,8 +16,16 @@ func Init(pwd *config.Password) []string {
 
 	client := &http.Client{}
 
-	fetchAPICredits(pwd)
-	response, _ := fetchAPI(client, pwd)
+	error := fetchAPICredits(pwd)
+
+	if error != nil {
+		os.Exit(1)
+	}
+	response, error := fetchAPI(client, pwd)
+
+	if error != nil {
+		os.Exit(1)
+	}
 
 	return response
 }
