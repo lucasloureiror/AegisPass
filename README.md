@@ -36,7 +36,7 @@ By combining cryptographically secure random numbers and the random.org API, Aeg
 
 ## Prerequisites
 
-- [Go](https://golang.org/doc/install) (version 1.20 or higher)
+- [Go](https://golang.org/doc/install) (version 1.18 or higher)
 
 ## Building the Project
 
