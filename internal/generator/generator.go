@@ -1,8 +1,6 @@
 package generator
 
 import (
-	"errors"
-	"os"
 	"strconv"
 
 	"github.com/lucasloureiror/AegisPass/internal/charsets"
@@ -13,10 +11,6 @@ import (
 )
 
 func Init(pwd *config.Password) {
-
-	if (validateSize(&pwd.Size)) != nil {
-		os.Exit(1)
-	}
 
 	apiResponse := make(chan []string)
 
@@ -43,13 +37,4 @@ func makeRandomPass(pwd *config.Password, randomInt []string) {
 		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
 	}
 
-}
-
-func validateSize(pwdSize *int) error {
-	if *pwdSize < 1 || *pwdSize > 25 {
-		invalidSize := errors.New("password size must be bigger than 0 and smaller than 25")
-		return invalidSize
-	} else {
-		return nil
-	}
 }

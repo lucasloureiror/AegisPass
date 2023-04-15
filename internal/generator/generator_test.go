@@ -19,23 +19,6 @@ func TestGeneratePassWithCorrectSize(t *testing.T) {
 	}
 }
 
-func TestGenerateInvalidPassSizes(t *testing.T) {
-	size := -1
-	got := validateSize(&size)
-
-	if got == nil {
-		t.Errorf("Expected error, but received none with password size %d", size)
-	}
-
-	size = 26
-
-	got = validateSize(&size)
-
-	if got == nil {
-		t.Errorf("Expected error, but received none with password size %d", size)
-	}
-}
-
 func TestMakeRandomPass(t *testing.T) {
 	pwd := config.Password{
 		Size:    8,

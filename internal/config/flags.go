@@ -8,10 +8,16 @@ import (
 func ParseFlags(flags *Flags) {
 	flag.String("numeric", " ", "Password with numbers only")
 	flag.String("credits", " ", "Print random.org API credits to the user")
+	flag.String("help", " ", "Help the user to use the CLI tool")
 
 	flag.Parse()
 
 	for i := range flag.Args() {
+
+		if strings.Contains(flag.Arg(i), "help") {
+			flags.NeedHelp = true
+			return
+		}
 
 		if strings.Contains(flag.Arg(i), "credits") {
 			flags.PrintCredits = true

@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
@@ -9,24 +10,53 @@ import (
 )
 
 func Init(pwd *config.Password) {
-	size(&pwd.Size)
+
+	var fetchErr error
+
+	pwd.Size, fetchErr = fetchSize(&os.Args)
+	if fetchErr != nil {
+		os.Exit(2)
+	}
+
+	sizeError := sizeCheck(pwd.Size)
+	if sizeError != nil {
+		os.Exit(2)
+	}
+
 	flags(&pwd.Flags)
 
 }
 
-func size(size *int) {
-	var convertErr error
+func sizeCheck(size int) error {
 
-	if len(os.Args) < 2 || os.Args[1] == "" {
-		fmt.Println("Enter password size")
-		fmt.Scan(size)
-	} else {
-		*size, convertErr = strconv.Atoi(os.Args[1])
+	if size <= 3 || size > 16 {
+		error := errors.New("password size must be bigger than 3 and smaller than 16")
+		fmt.Println("Error:", error.Error())
+		return error
 
-		if convertErr != nil {
-			panic("Not able to convert OS Arg to int, did you put the number on first argument?")
-		}
 	}
+	return nil
+}
+
+func fetchSize(args *[]string) (int, error) {
+
+	var convertErr error
+	var size int
+
+	if len(*args) < 2 || (*args)[1] == "" {
+		fmt.Println("Enter password size")
+		fmt.Scan(&size)
+	} else {
+		size, convertErr = strconv.Atoi((*args)[1])
+	}
+
+	if convertErr != nil {
+		convertErr = errors.New("not able to convert OS Arg to int, did you put the number on first argument?")
+		fmt.Println("Error:", convertErr.Error())
+		return size, convertErr
+	}
+
+	return size, nil
 
 }
 

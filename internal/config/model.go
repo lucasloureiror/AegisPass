@@ -9,6 +9,7 @@ type Password struct {
 }
 
 type Flags struct {
+	NeedHelp     bool
 	UseOnlyNums  bool
 	UseLower     bool
 	UseUpper     bool
