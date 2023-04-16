@@ -98,12 +98,14 @@ Arguments:
 
 Options:
   --numeric        Password with numbers only (default: password with length 10 if not specified)
+  --standard       Generate password with one upper case, one number and one special character at least.
   --credits        Print random.org API credits to the user after generating a password
-  help           Help the user to use the CLI tool
+  --help           Help the user to use the CLI tool
 
 Example:
   aegis 12 --numeric
   aegis 8
+  aegis 10 --standard
   aegis 10 --credits
   aegis help
 ```
