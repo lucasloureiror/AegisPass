@@ -29,14 +29,15 @@ func TestGenerateInvalidPassSizes(t *testing.T) {
 	}
 }
 
-func TestFetchSize(t *testing.T) {
+func TestFetchSizeWithoutValue(t *testing.T) {
 
 	args := []string{"path", "teste"}
+	defaultSize := 10
 
-	size, got := fetchSize(&args)
+	size, _ := fetchSize(&args)
 
-	if got == nil {
-		t.Errorf("Expected error, but received none with args slice %s and returned %d size", args, size)
+	if size != defaultSize {
+		t.Errorf("Expected size %d, but received size %d", defaultSize, size)
 	}
 
 }
