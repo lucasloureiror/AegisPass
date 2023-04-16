@@ -32,8 +32,8 @@ func TestMakeRandomPass(t *testing.T) {
 
 	got := pwd.Generated
 
-	if got != want {
-		t.Errorf("Expected result was %s and got %s", got, want)
+	if got == want {
+		t.Errorf("Expected different result, sent %s and got %s", got, want)
 	}
 
 }
