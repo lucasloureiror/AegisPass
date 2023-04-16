@@ -20,6 +20,10 @@ func PrintError(err string) {
 	fmt.Println("Error: ", err)
 }
 
+func PrintWarning(warn string) {
+	fmt.Println("Warning:", warn)
+}
+
 func PrintHelp() {
 
 	helpMessage := `

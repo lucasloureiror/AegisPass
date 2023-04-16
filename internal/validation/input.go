@@ -47,9 +47,10 @@ func fetchSize(args *[]string) (int, error) {
 	}
 
 	if convertErr != nil {
-		convertErr = errors.New("not able to convert OS Arg to int, did you put the number on first argument?")
-		output.PrintError(convertErr.Error())
-		return size, convertErr
+		warning := "Password lenght not detected, generating password with default lenght(10)"
+		size = 10
+		output.PrintWarning(warning)
+		return size, nil
 	}
 
 	return size, nil
