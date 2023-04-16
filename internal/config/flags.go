@@ -9,6 +9,7 @@ func ParseFlags(flags *Flags) {
 	flag.String("numeric", " ", "Password with numbers only")
 	flag.String("credits", " ", "Print random.org API credits to the user")
 	flag.String("help", " ", "Help the user to use the CLI tool")
+	flag.String("standard", " ", "Generate password with 1 upper case, 1 number and 1 special character at least.")
 
 	flag.Parse()
 

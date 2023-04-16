@@ -2,13 +2,12 @@ package shuffle
 
 import (
 	"crypto/rand"
-	"github.com/lucasloureiror/AegisPass/internal/config"
 	"math/big"
 )
 
-func Shuffle(pwd *config.Password) {
+func ShuffleByte(set *[]byte) {
 
-	arrSize := len(pwd.CharSet)
+	arrSize := len(*set)
 
 	for i := arrSize - 1; i > 0; i-- {
 		jBigInt, err := rand.Int(rand.Reader, big.NewInt(int64(arrSize)))
@@ -16,7 +15,25 @@ func Shuffle(pwd *config.Password) {
 			panic(err)
 		}
 		j := int(jBigInt.Int64())
-		pwd.CharSet[i], pwd.CharSet[j] = pwd.CharSet[j], pwd.CharSet[i]
+		(*set)[i], (*set)[j] = (*set)[j], (*set)[i]
 	}
+
+}
+
+func ShuffleStr(pwd *string) {
+
+	pwdBytes := []byte(*pwd)
+	strSize := len(pwdBytes)
+
+	for i := strSize - 1; i > 0; i-- {
+		jBigInt, err := rand.Int(rand.Reader, big.NewInt(int64(strSize)))
+		if err != nil {
+			panic(err)
+		}
+		j := int(jBigInt.Int64())
+		pwdBytes[i], pwdBytes[j] = pwdBytes[j], pwdBytes[i]
+	}
+
+	*pwd = string(pwdBytes)
 
 }

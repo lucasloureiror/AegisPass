@@ -20,8 +20,11 @@ func Init(pwd *config.Password) {
 
 	charsets.Create(pwd)
 
-	shuffle.Shuffle(pwd)
+	shuffle.ShuffleByte(&pwd.CharSet)
 
+	if pwd.Flags.UseStandard {
+		makeStdRandomPass(pwd)
+	}
 	makeRandomPass(pwd, <-apiResponse)
 
 	output.Print(pwd)
@@ -31,10 +34,24 @@ func Init(pwd *config.Password) {
 func makeRandomPass(pwd *config.Password, randomInt []string) {
 
 	var index int
+	pwdLen := pwd.Size - len(pwd.Generated)
 
-	for i := 0; i < pwd.Size; i++ {
+	for i := 0; i < pwdLen; i++ {
 		index, _ = strconv.Atoi(randomInt[i])
 		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
 	}
+	shuffle.ShuffleStr(&pwd.Generated)
+}
+
+func makeStdRandomPass(pwd *config.Password) {
+
+	upper := []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	shuffle.ShuffleByte(&upper)
+	special := []byte("!@#$%&*")
+	shuffle.ShuffleByte(&special)
+	nums := []byte("0123456789")
+	shuffle.ShuffleByte(&nums)
+
+	pwd.Generated = string(upper[0]) + string(special[0]) + string(nums[0])
 
 }

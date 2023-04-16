@@ -35,8 +35,13 @@ type HTTPClient interface {
 }
 
 func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
+	size := pwd.Size
 
-	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=%d&col=1&base=10&format=plain&rnd=new", pwd.Size, len(pwd.CharSet)-1)
+	if pwd.Flags.UseStandard {
+		size = size - 2
+	}
+
+	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=%d&col=1&base=10&format=plain&rnd=new", size, len(pwd.CharSet)-1)
 
 	response, responseError := client.Get(url)
 
