@@ -47,7 +47,7 @@ func fetchSize(args *[]string) (int, error) {
 	}
 
 	if convertErr != nil {
-		warning := "Password lenght not detected, generating password with default lenght(10)"
+		warning := "Password length not detected, generating password with default length(10)"
 		size = 10
 		output.PrintWarning(warning)
 		return size, nil
