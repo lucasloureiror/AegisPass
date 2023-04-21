@@ -11,8 +11,8 @@ func main() {
 
 	config.ParseFlags(&pwd.Flags)
 
-	validation.Init(&pwd)
+	validation.Start(&pwd)
 
-	generator.Init(&pwd)
+	generator.Start(&pwd)
 
 }

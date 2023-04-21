@@ -11,7 +11,7 @@ func TestGeneratePassWithCorrectSize(t *testing.T) {
 		Size: 7,
 	}
 
-	Init(&pwd)
+	Start(&pwd)
 	got := utf8.RuneCountInString(pwd.Generated)
 
 	if got != pwd.Size {

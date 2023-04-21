@@ -10,7 +10,7 @@ import (
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
-func Init(pwd *config.Password) {
+func Start(pwd *config.Password) {
 
 	apiResponse := make(chan []string)
 

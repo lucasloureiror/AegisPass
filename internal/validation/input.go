@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func Init(pwd *config.Password) {
+func Start(pwd *config.Password) {
 	var fetchErr error
 	flags(&pwd.Flags)
 
