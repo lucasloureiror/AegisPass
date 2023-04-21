@@ -5,7 +5,7 @@ import (
 	"math/big"
 )
 
-func ShuffleByte(set *[]byte) {
+func Byte(set *[]byte) {
 
 	arrSize := len(*set)
 
@@ -20,7 +20,7 @@ func ShuffleByte(set *[]byte) {
 
 }
 
-func ShuffleStr(pwd *string) {
+func String(pwd *string) {
 
 	pwdBytes := []byte(*pwd)
 	strSize := len(pwdBytes)

@@ -18,7 +18,6 @@ func Print(pwd *config.Password) {
 
 func PrintError(err string) {
 	fmt.Println("Error: ", err)
-	os.Exit(1)
 }
 
 func PrintWarning(warn string) {

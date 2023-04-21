@@ -15,7 +15,7 @@ func TestShuffle(t *testing.T) {
 
 	want := []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
 
-	ShuffleByte(&pwd.CharSet)
+	Byte(&pwd.CharSet)
 
 	got := pwd.CharSet
 	if bytes.Equal(got, want) {
