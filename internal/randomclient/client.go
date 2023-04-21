@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/output"
 )
 
 func Init(pwd *config.Password) []string {
@@ -35,6 +36,7 @@ type HTTPClient interface {
 }
 
 func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
+
 	size := pwd.Size
 
 	if pwd.Flags.UseStandard {
@@ -46,13 +48,18 @@ func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 	response, responseError := client.Get(url)
 
 	if responseError != nil {
-		fmt.Println("Error while fetching random.org API")
 
-		if netErr, ok := responseError.(net.Error); ok && netErr.Timeout() {
+		if response.StatusCode == http.StatusServiceUnavailable {
+			output.PrintError("service unavailable")
+		} else if netErr, ok := responseError.(net.Error); ok && netErr.Timeout() {
 			fmt.Println("The server seems to be offline.")
+		} else {
+			output.PrintError("can't reach random.org api server")
 		}
 		return nil, responseError
 	}
+
+	defer response.Body.Close()
 
 	responseBytes, _ := io.ReadAll(response.Body)
 
