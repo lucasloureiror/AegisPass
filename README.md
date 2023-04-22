@@ -85,7 +85,7 @@ For Linux or macOS just run the executable with help to see the usage instructio
 For Windows:
 
 ```
-aegis.exe help
+./aegis.exe help
 ```
 
 The following help message will be displayed:
