@@ -7,8 +7,6 @@ import (
 
 func fisherYatesShuffle(arr []byte, length int) []byte {
 	shuffled := make([]byte, length)
-	copy(shuffled, arr)
-
 	for i := 0; i < length; i++ {
 		j := randomInt(len(arr))
 		shuffled[i] = arr[j]
