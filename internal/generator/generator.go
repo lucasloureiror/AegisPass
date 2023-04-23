@@ -10,8 +10,12 @@ import (
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
-func Start(pwd *config.Password) {
+type generator interface {
+	generate(*config.Password, []string)
+}
 
+func Start(pwd *config.Password) {
+	var gen generator
 	apiResponse := make(chan []string)
 
 	go func() {
@@ -23,9 +27,14 @@ func Start(pwd *config.Password) {
 	shuffle.Byte(&pwd.CharSet)
 
 	if pwd.Flags.UseStandard {
-		makeStdRandomPass(pwd)
+		gen = &standard{}
+		gen.generate(pwd, <-apiResponse)
 	}
-	makeRandomPass(pwd, <-apiResponse)
+
+	gen = &random{}
+
+	gen.generate(pwd, <-apiResponse)
+	//makeRandomPass(pwd, <-apiResponse)
 
 	output.Print(pwd)
 
