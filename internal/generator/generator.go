@@ -9,26 +9,35 @@ import (
 )
 
 type generator interface {
-	generate(*config.Password, []string)
+	generate(*config.Password, []string) //Passing the model for a password ande slice of strings with api generated numbers.
 }
 
 func Start(pwd *config.Password) {
+
+	var gen generator
+	charsets.Create(pwd)
+
+	if pwd.Flags.Offline {
+		gen = offline{}
+		randomclient.Start(pwd)
+		gen.generate(pwd, nil)
+		output.Print(pwd)
+		return
+	}
+
 	apiResponse := make(chan []string)
 
 	go func() {
-		apiResponse <- randomclient.Init(pwd)
+		apiResponse <- randomclient.Start(pwd)
 	}()
-
-	charsets.Create(pwd)
 
 	shuffle.Byte(&pwd.CharSet)
 
-	var gen generator
 	if pwd.Flags.UseStandard {
-		gen = &standard{}
+		gen = standard{}
 		gen.generate(pwd, <-apiResponse)
 	} else {
-		gen = &random{}
+		gen = random{}
 		gen.generate(pwd, <-apiResponse)
 	}
 

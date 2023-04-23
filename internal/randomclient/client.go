@@ -13,13 +13,22 @@ import (
 	"github.com/lucasloureiror/AegisPass/internal/output"
 )
 
-func Init(pwd *config.Password) []string {
+func Start(pwd *config.Password) []string {
+	var err error
+
+	if pwd.Flags.Offline {
+		pwd.APICredit, err = fetchAPICredits()
+		if err != nil {
+			output.PrintError(err.Error())
+		}
+		return nil
+	}
 
 	client := &http.Client{}
 
-	error := fetchAPICredits(pwd)
+	pwd.APICredit, err = fetchAPICredits()
 
-	if error != nil {
+	if err != nil {
 		os.Exit(1)
 	}
 	response, error := fetchAPI(client, pwd)
@@ -68,8 +77,8 @@ func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 	return responseArr, nil
 }
 
-func fetchAPICredits(pwd *config.Password) error {
-
+func fetchAPICredits() (int, error) {
+	var credits int
 	client := &http.Client{}
 
 	url := "https://www.random.org/quota/?format=plain"
@@ -82,18 +91,17 @@ func fetchAPICredits(pwd *config.Password) error {
 		if netErr, ok := responseError.(net.Error); ok && netErr.Timeout() {
 			fmt.Println("The server seems to be offline.")
 		}
-		return responseError
+		return 0, responseError
 	}
 
 	responseBytes, _ := io.ReadAll(response.Body)
 
 	responseStr := strings.Split(string(responseBytes), "\n")
 
-	credits, _ := strconv.Atoi(responseStr[0])
-	pwd.APICredit = credits
-	checkEnoughCredits(pwd.APICredit)
+	credits, _ = strconv.Atoi(responseStr[0])
+	checkEnoughCredits(credits)
 
-	return nil
+	return credits, nil
 }
 
 func checkEnoughCredits(credits int) {

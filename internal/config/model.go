@@ -16,5 +16,5 @@ type Flags struct {
 	UseSymbols   bool
 	UseStandard  bool
 	PrintCredits bool
-	OfflineMode  bool
+	Offline      bool
 }
