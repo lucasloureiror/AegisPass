@@ -11,7 +11,7 @@ import (
 
 type MockHTTPClient struct{}
 
-func (m *MockHTTPClient) Get(url string) (resp *http.Response, err error) {
+func (m *MockHTTPClient) Do(*http.Request) (resp *http.Response, err error) {
 	return &http.Response{
 		StatusCode: 200,
 		Body:       io.NopCloser(strings.NewReader("0\n1\n2\n3\n4\n5\n6\n7\n8\n9")),
