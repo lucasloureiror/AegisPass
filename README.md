@@ -1,5 +1,12 @@
 # AegisPass
 
+![Go Reference](https://pkg.go.dev/badge/github.com/lucasloureiror/AegisPass/cmd/aegis.svg?style=flat-square)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/lucasloureiror/AegisPass?style=flat-square)
+![Go Report Card](https://goreportcard.com/badge/github.com/lucasloureiror/AegisPass?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/lucasloureiror/AegisPass?style=flat-square)
+![GitHub](https://img.shields.io/github/license/lucasloureiror/AegisPass)
+
+
 AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Site Reliability Engineers (SRE) to simplify the process of generating high quality random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org API to generate random passwords, providing enhanced security for your applications and services with to generate Randomness Mixing.
 
 AegisPass is written in Go and is available for Linux, Windows, and macOS and it does not use anything out of the standard library and random.org, in the principle of no-trust.
@@ -38,9 +45,25 @@ By combining cryptographically secure random numbers and the random.org API, Aeg
 
 - [Go](https://golang.org/doc/install) (version 1.18 or higher)
 
+## Installation
+
+To install AegisPass, you can use Go Install:
+  
+  ```bash
+  go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
+  ```
+
+If you don't have $GOPATH/bin in your PATH for your shell, don't forget to add:
+
+  ```bash
+  export PATH=$PATH:$(go env GOPATH)/bin
+  ```
+
+You can also download the binary from the [releases page](www.github.com/lucasloureiror/AegisPass/releases) and add it to your PATH.
+
 ## Building the Project
 
-To build the AegisPass project, you can use the scripts inside the `/build` folder. Follow these steps:
+If you want to build the AegisPass project, you can use the scripts inside the `/build` folder. Follow these steps:
 
 1. Clone the repository:
 
@@ -62,31 +85,21 @@ For Linux, Windows and macOS:
 make build
 ```
 
-This will compile the AegisPass project and create an executable binary in the `build/bin` folder called aegis.exe.
+This will compile the AegisPass project and create an executable binary in the `build/bin` folder called aegis.exe. Add to your path to use it globally.
 
 ## Usage
 
-After building the project, you can run the AegisPass CLI tool using the binary created in the `bin` folder.
+After installing AegisPass, you can use it to generate random passwords. The following examples show how to use AegisPass to generate random passwords with different lengths and options.
 
-1. Change to the `bin` directory:
 
-```
-cd build/bin
-```
+1. Running the AegisPass CLI tool:
 
-2. Running the AegisPass CLI tool:
-
-For Linux or macOS just run the executable with help to see the usage instructions:
+Just run the executable with help to see the usage instructions:
 
 ```
-./aegis.exe help
+aegis help
 ```
 
-For Windows:
-
-```
-./aegis.exe help
-```
 
 The following help message will be displayed:
 
