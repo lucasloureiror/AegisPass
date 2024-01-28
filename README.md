@@ -3,7 +3,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/lucasloureiror/AegisPass/cmd/aegis.svg)](https://pkg.go.dev/github.com/lucasloureiror/AegisPass/cmd/aegis)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/lucasloureiror/AegisPass?style=flat-square)
 [![Go Report Card](https://goreportcard.com/badge/github.com/lucasloureiror/AegisPass)](https://goreportcard.com/report/github.com/lucasloureiror/AegisPass)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/lucasloureiror/AegisPass?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/lucasloureiror/AegisPass)
 ![GitHub](https://img.shields.io/github/license/lucasloureiror/AegisPass)
 
 
