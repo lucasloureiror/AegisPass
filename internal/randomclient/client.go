@@ -93,7 +93,7 @@ func fetchAPICredits() (int, error) {
 	req, err := http.NewRequest("GET", url, nil)
 
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	req.Header.Set("User-Agent", "AegisPass github.com/lucasloureiror/AegisPass")
