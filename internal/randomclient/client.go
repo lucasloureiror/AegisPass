@@ -32,7 +32,7 @@ func Init(pwd *config.Password) []string {
 }
 
 type HTTPClient interface {
-	Get(url string) (resp *http.Response, err error)
+	Do(req *http.Request) (*http.Response, error)
 }
 
 func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
@@ -45,7 +45,14 @@ func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 
 	url := fmt.Sprintf("https://www.random.org/integers/?num=%d&min=0&max=%d&col=1&base=10&format=plain&rnd=new", size, len(pwd.CharSet)-1)
 
-	response, responseError := client.Get(url)
+	req, err := http.NewRequest("GET", url, nil)
+
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", "AegisPass github.com/lucasloureiror/AegisPass")
+
+	response, responseError := client.Do(req)
 
 	if responseError != nil {
 
@@ -74,7 +81,15 @@ func fetchAPICredits(pwd *config.Password) error {
 
 	url := "https://www.random.org/quota/?format=plain"
 
-	response, responseError := client.Get(url)
+	req, err := http.NewRequest("GET", url, nil)
+
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("User-Agent", "AegisPass github.com/lucasloureiror/AegisPass")
+
+	response, responseError := client.Do(req)
 
 	if responseError != nil {
 		fmt.Println("Error while fetching random.org API")
