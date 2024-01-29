@@ -1,0 +1,20 @@
+site_name: AegisPass
+repo_url: https://github.com/lucasloureiror/AegisPass
+repo_name: AegisPass
+
+theme: 
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - toc.integrate
+
+nav:
+  - Home: index.md
+extra: 
+  alternate:
+    - name: Portuguese
+      link: /br/
+      lang: pt-BR
