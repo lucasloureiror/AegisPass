@@ -16,14 +16,6 @@ import (
 func Start(pwd *config.Password) []string {
 	var err error
 
-	if pwd.Flags.Offline {
-		pwd.APICredit, err = fetchAPICredits()
-		if err != nil {
-			output.PrintError(err.Error())
-		}
-		return nil
-	}
-
 	client := &http.Client{}
 
 	pwd.APICredit, err = fetchAPICredits()

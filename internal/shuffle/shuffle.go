@@ -39,5 +39,5 @@ func String(pwd *string) {
 }
 
 func FisherYates(set []byte, length int) []byte {
-	return fisherYatesShuffle(set, length)
+	return fisherYatesSelector(set, length)
 }

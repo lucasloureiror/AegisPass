@@ -3,10 +3,13 @@ package shuffle
 import (
 	"crypto/rand"
 	"encoding/binary"
+	"fmt"
 )
 
-func fisherYatesShuffle(arr []byte, length int) []byte {
-	shuffled := make([]byte, length)
+// Well, when I came back to this code the logic was already in place and didn't want to change.
+func fisherYatesSelector(arr []byte, length int) []byte {
+	fmt.Println("Lenght: ", len(arr))
+	shuffled := make([]byte, len(arr))
 	for i := 0; i < length; i++ {
 		j := randomInt(len(arr))
 		shuffled[i] = arr[j]
@@ -17,6 +20,7 @@ func fisherYatesShuffle(arr []byte, length int) []byte {
 }
 
 func randomInt(max int) int {
+	fmt.Println("Max: ", max)
 	buf := make([]byte, 4)
 	_, err := rand.Read(buf)
 	if err != nil {

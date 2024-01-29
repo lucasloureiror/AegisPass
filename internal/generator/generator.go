@@ -19,7 +19,6 @@ func Start(pwd *config.Password) {
 
 	if pwd.Flags.Offline {
 		gen = offline{}
-		randomclient.Start(pwd)
 		gen.generate(pwd, nil)
 		output.Print(pwd)
 		return
