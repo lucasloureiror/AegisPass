@@ -26,8 +26,8 @@ func Start(pwd *config.Password) {
 
 func sizeCheck(size int) error {
 
-	if size <= 3 || size > 16 {
-		err := errors.New("password size must be bigger than 3 and smaller than 16")
+	if size <= 3 || size > 35 {
+		err := errors.New("password size must be bigger than 3 and smaller than 35")
 		output.PrintError(err.Error())
 		return err
 
