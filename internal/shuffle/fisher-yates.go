@@ -9,11 +9,10 @@ import (
 // Well, when I came back to this code the logic was already in place and didn't want to change.
 func fisherYatesSelector(arr []byte, length int) []byte {
 	fmt.Println("Lenght: ", len(arr))
-	shuffled := make([]byte, len(arr))
+	shuffled := make([]byte, length)
 	for i := 0; i < length; i++ {
 		j := randomInt(len(arr))
 		shuffled[i] = arr[j]
-		arr = append(arr[:j], arr[j+1:]...)
 	}
 
 	return shuffled
