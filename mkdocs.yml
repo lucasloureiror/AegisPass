@@ -4,13 +4,36 @@ repo_name: AegisPass
 
 theme: 
   name: material
+  palette:
+     
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/lightbulb
+        name: light mode
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: purple
+      toggle:
+        icon: material/lightbulb-outline
+        name: dark mode
+
+     
+
   language: en
   icon:
     repo: fontawesome/brands/github
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - toc.integrate
 
 nav:
   - Home: index.md
-  - Why: why.md
+  - Why use Aegis: why.md
+  - Installation: install.md
+  - Usage: usage.md
