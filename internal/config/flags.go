@@ -12,7 +12,7 @@ func ParseFlags(flags *Flags) {
 	flag.Bool("credits", false, "Print random.org API credits to the user")
 	flag.Bool("help", false, "Help the user to use the CLI tool")
 	flag.Bool("standard", false, "Generate password with one upper case, one number and one special character at least.")
-
+	flag.Bool("offline", false, "Generate password without using random.org API")
 	args := os.Args[1:] //Removing the path
 
 	for i := range args {
@@ -20,23 +20,21 @@ func ParseFlags(flags *Flags) {
 		if strings.Contains(args[i], "help") {
 			flags.NeedHelp = true
 			return
+		} else if strings.Contains(args[i], "standard") {
+			flags.UseStandard = true
+			return
 		}
-
 		if strings.Contains(args[i], "credits") {
 			flags.PrintCredits = true
-			continue
 		}
 
 		if strings.Contains(args[i], "numeric") {
 			flags.UseOnlyNums = true
-			return
 		}
 
-		if strings.Contains(args[i], "standard") {
-			flags.UseStandard = true
-			return
+		if strings.Contains(args[i], "offline") {
+			flags.Offline = true
 		}
 
 	}
-
 }

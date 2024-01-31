@@ -37,3 +37,7 @@ func String(pwd *string) {
 	*pwd = string(pwdBytes)
 
 }
+
+func FisherYates(set []byte, length int) []byte {
+	return fisherYatesSelector(set, length)
+}

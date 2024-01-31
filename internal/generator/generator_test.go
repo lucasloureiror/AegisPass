@@ -28,7 +28,7 @@ func TestMakeRandomPass(t *testing.T) {
 
 	want := "aaaabbbb"
 
-	random := &random{}
+	random := random{}
 
 	random.generate(&pwd, indexes)
 

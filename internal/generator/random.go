@@ -9,7 +9,7 @@ import (
 
 type random struct{}
 
-func (s *random) generate(pwd *config.Password, randomIndex []string) {
+func (random) generate(pwd *config.Password, randomIndex []string) {
 
 	var index int
 	pwdLen := pwd.Size - len(pwd.Generated)

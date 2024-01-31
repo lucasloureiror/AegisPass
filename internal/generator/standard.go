@@ -9,7 +9,7 @@ import (
 
 type standard struct{}
 
-func (s *standard) generate(pwd *config.Password, randomIndex []string) {
+func (standard) generate(pwd *config.Password, randomIndex []string) {
 	upper := []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	shuffle.Byte(&upper)
 	special := []byte("!@#$%&*")
