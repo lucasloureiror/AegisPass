@@ -13,3 +13,4 @@ theme:
 
 nav:
   - Home: index.md
+  - Why: why.md

@@ -20,7 +20,7 @@ func TestGenerateInvalidPassSizes(t *testing.T) {
 		t.Errorf("Expected error, but received none with password size %d", size)
 	}
 
-	size = 26
+	size = 36
 
 	got = sizeCheck(size)
 
