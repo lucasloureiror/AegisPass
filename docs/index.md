@@ -10,6 +10,3 @@ AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Sit
 AegisPass is written in Go and is available for Linux, Windows, and macOS and it does not use anything out of the standard library and random.org, in the principle of no-trust.
 
 
-```
-
-
