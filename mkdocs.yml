@@ -13,8 +13,3 @@ theme:
 
 nav:
   - Home: index.md
-extra: 
-  alternate:
-    - name: Portuguese
-      link: /br/
-      lang: pt-BR
