@@ -20,7 +20,7 @@ go env GOPATH
 
 ## Download the binary from the releases page
 
-You can also download the binary from the [releases page](www.github.com/lucasloureiror/AegisPass/releases) and add it to your PATH.
+You can also download the binary from the [releases page](https://www.github.com/lucasloureiror/AegisPass/releases) and add it to your PATH.
 
 ## Building the Project
 

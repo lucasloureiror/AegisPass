@@ -1,3 +1,8 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
 package output
 
 import (
@@ -27,6 +32,8 @@ func PrintWarning(warn string) {
 func PrintHelp() {
 
 	helpMessage := `
+AegisPass v1.2.0
+AegisPass source code is licensed under the Mozilla Public License 2.0 and is available at github.com/lucasloureiror/AegisPass
 Usage: aegis [password_length] [options]
 
 Arguments:
