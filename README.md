@@ -13,7 +13,7 @@ AegisPass is written in Go and is available for Linux, Windows, and macOS and it
 
 ## Documentation 
 
-You can check AegisPass official documentation [here](aegis.loureiro.tech) for more information about how to use AegisPass, why use AegisPass, how AegisPass works and more.
+You can check AegisPass official documentation [here](https://aegis.loureiro.tech) for more information about how to use AegisPass, why use AegisPass, how AegisPass works and more.
 
 ## Features
 
