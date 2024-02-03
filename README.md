@@ -6,7 +6,10 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/lucasloureiror/AegisPass)
 ![GitHub](https://img.shields.io/github/license/lucasloureiror/AegisPass)
 
-![AegisGif](static/normal.gif)
+<p align="center">
+  <img src="docs/static/normal.gif" />
+</p>
+
 
 AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Site Reliability Engineers (SRE) to simplify the process of generating high quality random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org to generate random passwords, providing enhanced security for your applications and services with to generate Randomness Mixing.
 
