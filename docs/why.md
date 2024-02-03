@@ -23,7 +23,7 @@ Short answer: You probably shouldn't trust AegisPass, and that's okay.
 
 Trust is gained, so you can take a look at AegisPass's source code and see that it does not use anything out of the standard library and random.org, in the principle of no-trust. You can also disable the use of random.org with the --offline flag.
 
-- **Open Source:** AegisPass is open source under the MIT License, so you can use it for free and modify it as you wish.
+- **Open Source:** AegisPass is open source under the MPL License, so you can use it for free and modify it as you wish, but if you modify AegisPass and distribute it, you must make the MPL licensed source code available under the MPL 2.0 license.
 
 - **Randomness Mixing**: AegisPass uses a technique called Random Mixing to generate passwords, that is a combination of events that current knowledge deems random, something like that is used by [Cloudflare's LavaRand](https://blog.cloudflare.com/randomness-101-lavarand-in-production).
 
