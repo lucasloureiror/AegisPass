@@ -24,21 +24,25 @@ func ParseFlags(flags *Flags) {
 
 		if strings.Contains(args[i], "help") {
 			flags.NeedHelp = true
-			return
-		} else if strings.Contains(args[i], "standard") {
+			break
+		}
+		if strings.Contains(args[i], "standard") {
 			flags.UseStandard = true
-			return
+			break
 		}
 		if strings.Contains(args[i], "credits") {
 			flags.PrintCredits = true
+			continue
 		}
 
 		if strings.Contains(args[i], "numeric") {
 			flags.UseOnlyNums = true
+			continue
 		}
 
 		if strings.Contains(args[i], "offline") {
 			flags.Offline = true
+			continue
 		}
 
 	}
