@@ -34,6 +34,12 @@ You can check AegisPass official documentation [here](https://aegis.loureiro.tec
 
 ## Installation
 
+[Homebrew](https://brew.sh) is one of the quickest ways to install AegisPass on macOS and Linux and you can stay up to date with the latest version.
+
+```bash
+brew install lucasloureiror/tools/aegis
+```
+
 To install AegisPass, you can use Go Install:
   
   ```bash
