@@ -55,7 +55,7 @@
 #   Hide                            Hide the subsequent commands from the output
 #   Show                            Show the subsequent commands in the output
 
-Output docs/static/aegis.gif
+Output docs/static/normal.gif
 
 Require aegis
 
@@ -67,9 +67,9 @@ Set LineHeight 1.3
 
 Set Theme "Dracula"
 
-Set FontSize 30
-Set Width 1200
-Set Height 600
+Set FontSize 15
+Set Width 500
+Set Height 200
 
 
 Hide
@@ -81,26 +81,44 @@ Type "aegis"
 Sleep 500ms
 Enter
 
-Sleep 3s
+Sleep 2s
+
+Hide
+Type "clear"
+Enter
+Show
 
 Type "aegis 15"
 Sleep 500ms
 Enter
 
-Sleep 3s
+Sleep 2s
+
+Hide
+Type "clear"
+Enter
+Show
+
+
 Type "aegis 13 --standard"
 Sleep 500ms
 Enter
 
-Sleep 3s
-
+Sleep 2s
+Hide
+Type "clear"
+Enter
+Show
 Type "aegis 15 --offline"
 Sleep 500ms
 Enter
 
-Sleep 3s
-
+Sleep 2s
+Hide
+Type "clear"
+Enter
+Show
 Type "aegis 8 --numeric"
 Sleep 500ms
 Enter
-Sleep 3s
+Sleep 2s

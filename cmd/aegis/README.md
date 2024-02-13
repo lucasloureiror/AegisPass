@@ -47,17 +47,23 @@ By combining cryptographically secure random numbers and the random.org API, Aeg
 
 ## Installation
 
-To install AegisPass, you can use Go Install:
-  
-  ```bash
-  go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
-  ```
+You can install AegisPass with [Homebrew](https://brew.sh/) on macOS and Linux:
+
+```bash
+brew install lucasloureiror/tools/aegis
+```
+
+Or you can use Go Install:
+
+```bash
+go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
+```
 
 If you don't have $GOPATH/bin in your PATH for your shell, don't forget to add:
 
-  ```bash
-  export PATH=$PATH:$(go env GOPATH)/bin
-  ```
+```bash
+export PATH=$PATH:$(go env GOPATH)/bin
+```
 
 You can also download the binary from the [releases page](www.github.com/lucasloureiror/AegisPass/releases) and add it to your PATH.
 

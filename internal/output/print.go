@@ -32,7 +32,7 @@ func PrintWarning(warn string) {
 func PrintHelp() {
 
 	helpMessage := `
-AegisPass v1.2.0
+AegisPass v1.2.1
 AegisPass source code is licensed under the Mozilla Public License 2.0 and is available at github.com/lucasloureiror/AegisPass
 Usage: aegis [password_length] [options]
 

@@ -29,6 +29,13 @@ archives:
       - goos: windows
         format: zip
 
+brews:
+  - name: aegis
+    homepage: https://github.com/lucasloureiror/AegisPass
+    repository:
+      owner: lucasloureiror
+      name: homebrew-tools
+
 changelog:
   sort: asc
   filters:
