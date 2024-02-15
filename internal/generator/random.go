@@ -23,7 +23,6 @@ func (random) generate(input *cli.Input) (string, int, error) {
 	var credits int
 
 	wg.Add(2)
-	shuffle.Byte(&input.CharSet)
 
 	go func() {
 		defer wg.Done()
