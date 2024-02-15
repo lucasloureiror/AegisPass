@@ -14,34 +14,35 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/output"
 )
 
-func Start(pwd *config.Password) []string {
+func Start(input *cli.Input) ([]string, int, error) {
 	var err error
+	var credits int
 
 	client := &http.Client{}
 
-	pwd.APICredit, err = fetchAPICredits()
+	credits, err = fetchAPICredits()
 
 	if err != nil {
 		os.Exit(1)
 	}
-	response, error := fetchAPI(client, pwd)
+	response, error := fetchAPI(client, input)
 
 	if error != nil {
 		os.Exit(1)
 	}
 
-	return response
+	return response, credits, nil
 }
 
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
+func fetchAPI(client HTTPClient, pwd *cli.Input) ([]string, error) {
 
 	size := pwd.Size
 

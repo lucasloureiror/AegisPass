@@ -7,13 +7,13 @@ package validation
 
 import (
 	"errors"
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/output"
 	"os"
 	"strconv"
 )
 
-func Start(pwd *config.Password) {
+func Start(pwd *cli.Input) {
 	var fetchErr error
 	flags(&pwd.Flags)
 
@@ -62,7 +62,7 @@ func fetchSize(args *[]string) (int, error) {
 
 }
 
-func flags(flags *config.Flags) error {
+func flags(flags *cli.Flags) error {
 
 	if flags.NeedHelp {
 		output.PrintHelp()

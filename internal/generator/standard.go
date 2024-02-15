@@ -6,30 +6,61 @@
 package generator
 
 import (
-	"strconv"
-
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
+	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
+	"strconv"
+	"sync"
 )
 
 type standard struct{}
 
-func (standard) generate(pwd *config.Password, randomIndex []string) {
-	upper := []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	shuffle.Byte(&upper)
-	special := []byte("!@#$%&*")
-	shuffle.Byte(&special)
-	nums := []byte("0123456789")
-	shuffle.Byte(&nums)
+func (standard) generate(input *cli.Input) (string, int, error) {
 
-	pwd.Generated = string(upper[0]) + string(special[0]) + string(nums[0])
+	var wg sync.WaitGroup
+	var credits int
+	var randomIndex []string
+	wg.Add(5)
+	upper := []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	special := []byte("!@#$%&*")
+	nums := []byte("0123456789")
+
+	go func() {
+		defer wg.Done()
+		shuffle.Byte(&upper)
+	}()
+	go func() {
+		defer wg.Done()
+		shuffle.Byte(&special)
+	}()
+
+	go func() {
+		defer wg.Done()
+		shuffle.Byte(&nums)
+	}()
+
+	go func() {
+		defer wg.Done()
+		randomIndex, credits, _ = randomclient.Start(input)
+	}()
+
+	go func() {
+		defer wg.Done()
+		shuffle.Byte(&input.CharSet)
+	}()
+
+	wg.Wait()
+
+	generated := string(upper[0]) + string(special[0]) + string(nums[0])
 
 	var index int
-	pwdLen := pwd.Size - len(pwd.Generated)
+	pwdLen := input.Size - len(generated)
 
 	for i := 0; i < pwdLen; i++ {
 		index, _ = strconv.Atoi(randomIndex[i])
-		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
+		generated = generated + string(input.CharSet[index])
 	}
-	shuffle.String(&pwd.Generated)
+	shuffle.String(&generated)
+
+	return generated, credits, nil
 }

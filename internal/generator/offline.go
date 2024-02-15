@@ -6,14 +6,14 @@
 package generator
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
 type offline struct{}
 
-func (offline) generate(pwd *config.Password, _ []string) {
+func (offline) generate(pwd *cli.Input) (string, int, error) {
 	shuffle.Byte(&pwd.CharSet)
 	pwdByte := shuffle.FisherYates(pwd.CharSet, pwd.Size)
-	pwd.Generated = string(pwdByte)
+	return string(pwdByte), -1, nil
 }

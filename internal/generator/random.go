@@ -7,22 +7,46 @@ package generator
 
 import (
 	"strconv"
+	"sync"
 
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
+	"github.com/lucasloureiror/AegisPass/internal/randomclient"
 	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
 type random struct{}
 
-func (random) generate(pwd *config.Password, randomIndex []string) {
+func (random) generate(input *cli.Input) (string, int, error) {
+
+	var randomIndex []string
+	var wg sync.WaitGroup
+	var credits int
+
+	wg.Add(2)
+	shuffle.Byte(&input.CharSet)
+
+	go func() {
+		defer wg.Done()
+		randomIndex, credits, _ = randomclient.Start(input)
+	}()
+
+	go func() {
+		defer wg.Done()
+		shuffle.Byte(&input.CharSet)
+	}()
 
 	var index int
-	pwdLen := pwd.Size - len(pwd.Generated)
+	var generated string
+	pwdLen := input.Size - len(generated)
+
+	wg.Wait()
 
 	for i := 0; i < pwdLen; i++ {
 		index, _ = strconv.Atoi(randomIndex[i])
-		pwd.Generated = pwd.Generated + string(pwd.CharSet[index])
+		generated = generated + string(input.CharSet[index])
 	}
-	shuffle.String(&pwd.Generated)
+	shuffle.String(&generated)
+
+	return generated, credits, nil
 
 }

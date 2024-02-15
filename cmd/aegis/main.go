@@ -6,18 +6,20 @@
 package main
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/generator"
 	"github.com/lucasloureiror/AegisPass/internal/validation"
 )
 
 func main() {
-	var pwd config.Password
+	var input cli.Input
 
-	config.ParseFlags(&pwd.Flags)
+	cli.ParseFlags(&input.Flags)
 
-	validation.Start(&pwd)
+	validation.Start(&input)
 
-	generator.Start(&pwd)
+	mode := generator.ReturnGeneratorMode(&input)
+
+	generator.Start(input, mode)
 
 }

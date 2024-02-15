@@ -9,12 +9,12 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 )
 
 func TestShuffle(t *testing.T) {
 
-	pwd := config.Password{
+	pwd := cli.Input{
 		CharSet: []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*"),
 	}
 

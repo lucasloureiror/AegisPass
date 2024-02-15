@@ -5,20 +5,20 @@
  */
 package charsets
 
-import "github.com/lucasloureiror/AegisPass/internal/config"
+import "github.com/lucasloureiror/AegisPass/internal/cli"
 
-func Create(pwd *config.Password) {
+func Create(pwd *cli.Input) {
 
-	var (
-		nums = []byte("0123456789")
-		full = []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*")
-	)
+	nums := [10]byte{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+	full := [70]byte{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@', '#', '$', '%', '&', '*'}
 
 	if pwd.Flags.UseOnlyNums {
-		pwd.CharSet = append(pwd.CharSet, nums...)
+		pwd.CharSet = nums[:]
 		return
 	} else {
-		pwd.CharSet = full
+		pwd.CharSet = full[:]
 
 	}
 

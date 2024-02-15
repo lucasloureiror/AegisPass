@@ -6,14 +6,28 @@
 
 package generator
 
-import "github.com/lucasloureiror/AegisPass/internal/config"
+import (
+	"fmt"
 
-type generatorInterface interface {
-	generate(*config.Password, []string) //Passing the model for a password ande slice of strings with api generated numbers.
+	"github.com/lucasloureiror/AegisPass/internal/cli"
+)
+
+type PasswordGeneratorStrategy interface {
+	generate(*cli.Input) (string, int, error) //Passing the model for a password ande slice of strings with api generated numbers.
 }
 
-type GeneratorData struct {
-	behavior generatorInterface
-	password config.Password
-	random   []string
+type passwordGenerator struct {
+	mode      PasswordGeneratorStrategy
+	data      cli.Input
+	generated string
+	credits   int
+}
+
+func (pwd *passwordGenerator) print() {
+	if pwd.data.Flags.PrintCredits {
+		fmt.Println(pwd.generated)
+		fmt.Println("API credits remaining:", fmt.Sprint(pwd.credits))
+	} else {
+		fmt.Println(pwd.generated)
+	}
 }

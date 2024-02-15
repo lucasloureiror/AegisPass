@@ -1,27 +1,19 @@
-/*
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-package output
+package generator
 
 import (
-	"fmt"
-	"os"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 )
 
-func PrintError(err string) {
-	fmt.Println("Error: ", err)
+type help struct{}
+
+func (h help) generate(pwd *cli.Input, apiResponse []string) string {
+	return ""
 }
 
-func PrintWarning(warn string) {
-	fmt.Println("Warning: ", warn)
-}
-
-func PrintHelp() {
+func (h help) print() string {
 
 	helpMessage := `
-AegisPass v1.2.1
+AegisPass v1.2.2
 AegisPass source code is licensed under the Mozilla Public License 2.0 and is available at github.com/lucasloureiror/AegisPass
 Usage: aegis [password_length] [options]
 
@@ -42,6 +34,5 @@ Example:
   aegis 10 --credits
   aegis help
 `
-	fmt.Print(helpMessage)
-	os.Exit(0)
+	return helpMessage
 }

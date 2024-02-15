@@ -3,14 +3,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
-package config
+package cli
 
-type Password struct {
-	Size      int
-	Flags     Flags
-	APICredit int
-	Generated string
-	CharSet   []byte
+type Input struct {
+	Size    int
+	Flags   Flags
+	CharSet []byte
 }
 
 type Flags struct {

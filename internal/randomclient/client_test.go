@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 )
 
 type MockHTTPClient struct{}
@@ -25,7 +25,7 @@ func (m *MockHTTPClient) Do(*http.Request) (resp *http.Response, err error) {
 
 func TestFetchAPI(t *testing.T) {
 	mockClient := &MockHTTPClient{}
-	pwd := config.Password{
+	pwd := cli.Input{
 		Size: 10,
 	}
 
