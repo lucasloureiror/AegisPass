@@ -6,34 +6,27 @@
 package generator
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/shuffle"
+	"strconv"
 	"sync"
+
+	"github.com/lucasloureiror/AegisPass/internal/cli"
+	"github.com/lucasloureiror/AegisPass/internal/randomclient"
+	"github.com/lucasloureiror/AegisPass/internal/shuffle"
 )
 
-type standard struct{}
+type online struct{}
 
-func (standard) generate(input *cli.Input) (string, int, error) {
+func (online) generate(input *cli.Input) (string, int, error) {
 
+	var randomIndex []string
 	var wg sync.WaitGroup
 	var credits int
-	wg.Add(4)
-	upper := []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	special := []byte("!@#$%&*-_")
-	nums := []byte("0123456789")
+
+	wg.Add(2)
 
 	go func() {
 		defer wg.Done()
-		shuffle.Byte(&upper)
-	}()
-	go func() {
-		defer wg.Done()
-		shuffle.Byte(&special)
-	}()
-
-	go func() {
-		defer wg.Done()
-		shuffle.Byte(&nums)
+		randomIndex, credits, _ = randomclient.Start(input)
 	}()
 
 	go func() {
@@ -41,14 +34,18 @@ func (standard) generate(input *cli.Input) (string, int, error) {
 		shuffle.Byte(&input.CharSet)
 	}()
 
+	var index int
+	var generated string
+	pwdLen := input.Size - len(generated)
+
 	wg.Wait()
 
-	requirements := string(upper[0]) + string(special[0]) + string(nums[0])
-
-	generated := shuffle.BuildString(input.CharSet, input.Size-3)
-
-	generated = generated + requirements
+	for i := 0; i < pwdLen; i++ {
+		index, _ = strconv.Atoi(randomIndex[i])
+		generated = generated + string(input.CharSet[index])
+	}
 	shuffle.String(&generated)
 
 	return generated, credits, nil
+
 }

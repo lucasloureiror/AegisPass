@@ -1,22 +1,28 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
 package generator
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/charsets"
-	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"testing"
 	"unicode/utf8"
+
+	"github.com/lucasloureiror/AegisPass/internal/charsets"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 )
 
-func TestGenerateRandomPassWithCorrectSize(t *testing.T) {
+func TestGenerateOfflinePassWithCorrectSize(t *testing.T) {
 	pwd := cli.Input{
-		Size: 8,
+		Size: 7,
 	}
 
-	random := random{}
+	offline := random{}
 
 	generator := passwordGenerator{
 		data: pwd,
-		mode: random,
+		mode: offline,
 	}
 
 	charsets.Create(&generator.data)
@@ -25,6 +31,6 @@ func TestGenerateRandomPassWithCorrectSize(t *testing.T) {
 	got := utf8.RuneCountInString(password)
 
 	if got != pwd.Size {
-		t.Errorf("GeneratePass received %d, but returned pass with size %d", 8, got)
+		t.Errorf("GeneratePass received %d, but returned pass with size %d", 7, got)
 	}
 }
