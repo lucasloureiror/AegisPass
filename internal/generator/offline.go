@@ -14,6 +14,7 @@ type offline struct{}
 
 func (offline) generate(input *cli.Input) (string, int, error) {
 	shuffle.Byte(&input.CharSet)
-	pwdByte := shuffle.FisherYates(input.CharSet, input.Size)
-	return string(pwdByte), -1, nil
+	password := shuffle.BuildString(input.CharSet, input.Size)
+	shuffle.String(&password)
+	return password, -1, nil
 }

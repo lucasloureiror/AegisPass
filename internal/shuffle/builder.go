@@ -5,14 +5,13 @@
  */
 package shuffle
 
-import ()
-
-func FisherYates(arr []byte, length int) []byte {
-	shuffled := make([]byte, length)
+// This function builds a string with CSPRNG using the original charset and the length of the password
+func BuildString(arr []byte, length int) string {
+	result := make([]byte, length)
 	for i := 0; i < length; i++ {
 		j := randomInt(len(arr))
-		shuffled[i] = arr[j]
+		result[i] = arr[j]
 	}
 
-	return shuffled
+	return string(result)
 }
