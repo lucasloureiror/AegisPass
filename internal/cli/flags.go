@@ -24,11 +24,11 @@ func ParseFlags(flags *Flags) {
 
 		if strings.Contains(args[i], "help") {
 			flags.NeedHelp = true
-			break
+			return
 		}
 		if strings.Contains(args[i], "standard") {
 			flags.UseStandard = true
-			break
+			return
 		}
 		if strings.Contains(args[i], "credits") {
 			flags.PrintCredits = true

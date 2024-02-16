@@ -12,6 +12,10 @@ func ReturnGeneratorMode(data *cli.Input) PasswordGeneratorStrategy {
 		return standard{}
 	}
 
+	if data.Flags.NeedHelp {
+		return help{}
+	}
+
 	return random{}
 
 }

@@ -6,12 +6,7 @@ import (
 
 type help struct{}
 
-func (h help) generate(pwd *cli.Input, apiResponse []string) string {
-	return ""
-}
-
-func (h help) print() string {
-
+func (h help) generate(pwd *cli.Input) (string, int, error) {
 	helpMessage := `
 AegisPass v1.2.2
 AegisPass source code is licensed under the Mozilla Public License 2.0 and is available at github.com/lucasloureiror/AegisPass
@@ -34,5 +29,5 @@ Example:
   aegis 10 --credits
   aegis help
 `
-	return helpMessage
+	return helpMessage, -1, nil
 }

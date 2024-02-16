@@ -13,28 +13,30 @@ import (
 	"strconv"
 )
 
-func Start(pwd *cli.Input) {
+func Start(input *cli.Input) error {
 	var fetchErr error
-	flags(&pwd.Flags)
 
-	pwd.Size, fetchErr = fetchSize(&os.Args)
+	if input.Flags.NeedHelp {
+		return nil
+	}
+
+	input.Size, fetchErr = fetchSize(&os.Args)
 	if fetchErr != nil {
-		os.Exit(2)
+		return fetchErr
 	}
 
-	sizeError := sizeCheck(pwd.Size)
+	sizeError := sizeCheck(input.Size)
 	if sizeError != nil {
-		os.Exit(2)
+		return sizeError
 	}
 
+	return nil
 }
 
 func sizeCheck(size int) error {
 
 	if size <= 3 || size > 35 {
-		err := errors.New("password size must be bigger than 3 and smaller than 35")
-		output.PrintError(err.Error())
-		return err
+		return errors.New("password size must be bigger than 3 and smaller than 35")
 
 	}
 	return nil
@@ -60,14 +62,4 @@ func fetchSize(args *[]string) (int, error) {
 
 	return size, nil
 
-}
-
-func flags(flags *cli.Flags) error {
-
-	if flags.NeedHelp {
-		output.PrintHelp()
-		return nil
-	}
-
-	return nil
 }

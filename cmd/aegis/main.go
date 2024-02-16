@@ -8,6 +8,7 @@ package main
 import (
 	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/generator"
+	"github.com/lucasloureiror/AegisPass/internal/output"
 	"github.com/lucasloureiror/AegisPass/internal/validation"
 )
 
@@ -16,7 +17,12 @@ func main() {
 
 	cli.ParseFlags(&input.Flags)
 
-	validation.Start(&input)
+	err := validation.Start(&input)
+
+	if err != nil {
+		output.PrintError(err.Error())
+		return
+	}
 
 	mode := generator.ReturnGeneratorMode(&input)
 
