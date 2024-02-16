@@ -20,7 +20,7 @@ func Start(input *cli.Input) error {
 		return nil
 	}
 
-	input.Size, fetchErr = fetchSize(&os.Args)
+	input.Size, fetchErr = fetchSize(os.Args)
 	if fetchErr != nil {
 		return fetchErr
 	}
@@ -42,20 +42,20 @@ func sizeCheck(size int) error {
 	return nil
 }
 
-func fetchSize(args *[]string) (int, error) {
+func fetchSize(args []string) (int, error) {
 
 	var convertErr error
 	var size int
 
-	if len(*args) < 2 || (*args)[1] == "" {
-		size = 10
+	if len(args) < 2 || (args)[1] == "" {
+		size = 15
 	} else {
-		size, convertErr = strconv.Atoi((*args)[1])
+		size, convertErr = strconv.Atoi((args)[1])
 	}
 
 	if convertErr != nil {
-		warning := "Password length not detected, generating password with default length(10)"
-		size = 10
+		warning := "Password length not detected, generating password with default length(15)"
+		size = 15
 		output.PrintWarning(warning)
 		return size, nil
 	}
