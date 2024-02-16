@@ -15,7 +15,7 @@ import (
 func main() {
 	var input cli.Input
 
-	cli.ParseFlags(&input.Flags)
+	cli.ParseFlags(&input)
 
 	err := validation.Start(&input)
 

@@ -7,27 +7,31 @@ package validation
 
 import (
 	"errors"
+	"flag"
+	"strconv"
+
 	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/output"
-	"os"
-	"strconv"
 )
 
 func Start(input *cli.Input) error {
-	var fetchErr error
+	var err error
 
 	if input.Flags.NeedHelp {
 		return nil
 	}
 
-	input.Size, fetchErr = fetchSize(os.Args)
-	if fetchErr != nil {
-		return fetchErr
+	input.Size = fetchSize(flag.Arg(0))
+
+	err = sizeCheck(input.Size)
+	if err != nil {
+		return err
 	}
 
-	sizeError := sizeCheck(input.Size)
-	if sizeError != nil {
-		return sizeError
+	err = numberOfPasswordsCheck(input.NumberOfPasswords)
+
+	if err != nil {
+		return err
 	}
 
 	return nil
@@ -42,24 +46,21 @@ func sizeCheck(size int) error {
 	return nil
 }
 
-func fetchSize(args []string) (int, error) {
-
-	var convertErr error
-	var size int
-
-	if len(args) < 2 || (args)[1] == "" {
-		size = 15
-	} else {
-		size, convertErr = strconv.Atoi((args)[1])
-	}
+func fetchSize(args string) int {
+	size, convertErr := strconv.Atoi(args)
 
 	if convertErr != nil {
 		warning := "Password length not detected, generating password with default length(15)"
 		size = 15
 		output.PrintWarning(warning)
-		return size, nil
 	}
+	return size
 
-	return size, nil
+}
 
+func numberOfPasswordsCheck(number int) error {
+	if number < 1 || number > 10 {
+		return errors.New("number of passwords must be bigger than 0 and smaller than 10")
+	}
+	return nil
 }

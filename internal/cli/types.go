@@ -6,9 +6,10 @@
 package cli
 
 type Input struct {
-	Size    int
-	Flags   Flags
-	CharSet []byte
+	Size              int
+	Flags             Flags
+	CharSet           []byte
+	NumberOfPasswords int
 }
 
 type Flags struct {

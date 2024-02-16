@@ -16,6 +16,7 @@ Arguments:
   password_length  The length of the password to be generated (default: 10)
 
 Options:
+  --bulk 		   Specify the number of passwords to be generated (default: 1)
   --offline 	   Generate random or numeric passwords without using random.org API
   --numeric        Password with numbers only (default: password with length 10 if not specified)
   --standard       Generate password with one upper case, one number and one special character at least.

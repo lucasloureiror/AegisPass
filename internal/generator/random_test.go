@@ -20,9 +20,9 @@ func TestGenerateRandomPassWithCorrectSize(t *testing.T) {
 	}
 
 	charsets.Create(&generator.data)
-	generator.generated, _, _ = generator.mode.generate(&generator.data)
+	password, _, _ := generator.mode.generate(&generator.data)
 
-	got := utf8.RuneCountInString(generator.generated)
+	got := utf8.RuneCountInString(password)
 
 	if got != pwd.Size {
 		t.Errorf("GeneratePass received %d, but returned pass with size %d", 8, got)

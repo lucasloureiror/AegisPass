@@ -17,9 +17,13 @@ func Start(input cli.Input, mode PasswordGeneratorStrategy) {
 		data: input,
 	}
 
+	generator.generated = make([]string, input.NumberOfPasswords)
+
 	charsets.Create(&generator.data)
 
-	generator.generated, generator.credits, _ = generator.mode.generate(&generator.data)
+	for i := 0; i < input.NumberOfPasswords; i++ {
+		generator.generated[i], generator.credits, _ = generator.mode.generate(&generator.data)
+	}
 
 	generator.print()
 

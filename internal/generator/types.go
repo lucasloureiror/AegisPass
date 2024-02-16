@@ -19,15 +19,15 @@ type PasswordGeneratorStrategy interface {
 type passwordGenerator struct {
 	mode      PasswordGeneratorStrategy
 	data      cli.Input
-	generated string
+	generated []string
 	credits   int
 }
 
 func (pwd *passwordGenerator) print() {
 	if pwd.data.Flags.PrintCredits {
-		fmt.Println(pwd.generated)
 		fmt.Println("API credits remaining:", fmt.Sprint(pwd.credits))
-	} else {
-		fmt.Println(pwd.generated)
+	}
+	for _, password := range pwd.generated {
+		fmt.Println(password)
 	}
 }

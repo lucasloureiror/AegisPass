@@ -12,8 +12,8 @@ import (
 
 type offline struct{}
 
-func (offline) generate(pwd *cli.Input) (string, int, error) {
-	shuffle.Byte(&pwd.CharSet)
-	pwdByte := shuffle.FisherYates(pwd.CharSet, pwd.Size)
+func (offline) generate(input *cli.Input) (string, int, error) {
+	shuffle.Byte(&input.CharSet)
+	pwdByte := shuffle.FisherYates(input.CharSet, input.Size)
 	return string(pwdByte), -1, nil
 }

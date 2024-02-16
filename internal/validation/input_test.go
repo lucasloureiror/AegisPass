@@ -36,10 +36,10 @@ func TestGenerateInvalidPassSizes(t *testing.T) {
 
 func TestFetchSizeWithoutValue(t *testing.T) {
 
-	args := []string{"path", "teste"}
-	defaultSize := 10
+	args := "teste"
+	defaultSize := 15
 
-	size, _ := fetchSize(&args)
+	size := fetchSize(args)
 
 	if size != defaultSize {
 		t.Errorf("Expected size %d, but received size %d", defaultSize, size)
