@@ -25,20 +25,28 @@ $ aegis 10
 a5uEiG9HNK
 ```
 
-3.**Standard**: Generate password with one upper case, one number and one special character at least. Useful for online services that require a password with these characteristics.
+3.**Bulk**: Generate a N number of passwords with the length the user provides. The default number of passwords is 1.
+
+```bash
+$ aegis --bulk 2 10
+-%>(2IT!A(
+Uec9Z)@zJf
+```
+
+4.**Standard**: Generate password with one upper case, one number and one special character at least. Useful for online services that require a password with these characteristics.
 
 ```bash
 $ aegis --standard 15
 lc8lErAp!0LzIa6
 ```
 
-4.**Numeric**: Generate a password with only numbers.
+5.**Numeric**: Generate a password with only numbers.
 ```bash
 $ aegis --numeric 13
 3899182977605
 ```
 
-5.**Online**: Generate a password without using random.org, using only the OS entropy pool to generate the password as random as possible.
+6.**Online**: Generate a password without using random.org, using only the OS entropy pool to generate the password as random as possible.
 ```bash
  $ aegis --online 20
  O8@f50*larH!LlDb6BbB

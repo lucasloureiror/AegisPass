@@ -77,16 +77,6 @@ Type "clear"
 Enter
 Show
 
-Type "aegis"
-Sleep 500ms
-Enter
-
-Sleep 2s
-
-Hide
-Type "clear"
-Enter
-Show
 
 Type "aegis 15"
 Sleep 500ms
@@ -100,7 +90,7 @@ Enter
 Show
 
 
-Type "aegis 13 --standard"
+Type "aegis --standard 13"
 Sleep 500ms
 Enter
 
@@ -109,7 +99,7 @@ Hide
 Type "clear"
 Enter
 Show
-Type "aegis 15 --offline"
+Type "aegis --online 10"
 Sleep 500ms
 Enter
 
@@ -118,7 +108,17 @@ Hide
 Type "clear"
 Enter
 Show
-Type "aegis 8 --numeric"
+Type "aegis --numeric 8"
+Sleep 500ms
+Enter
+Sleep 2s
+
+Sleep 2s
+Hide
+Type "clear"
+Enter
+Show
+Type "aegis --bulk 2 18 "
 Sleep 500ms
 Enter
 Sleep 2s
