@@ -38,7 +38,7 @@ $ aegis --numeric 13
 3899182977605
 ```
 
-5.**Offline**: Generate a password without using random.org, using only the OS entropy pool to generate the password as random as possible.
+5.**Online**: Generate a password without using random.org, using only the OS entropy pool to generate the password as random as possible.
 ```bash
  $ aegis --online 20
  O8@f50*larH!LlDb6BbB
