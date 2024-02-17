@@ -13,29 +13,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package cli
 
-import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
-)
+type Input struct {
+	Size              int
+	Flags             Flags
+	CharSet           []byte
+	NumberOfPasswords int
+}
 
-func main() {
-	var input cli.Input
-
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
-	}
-
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
-
+type Flags struct {
+	NeedHelp     bool
+	UseOnlyNums  bool
+	UseLower     bool
+	UseUpper     bool
+	UseSymbols   bool
+	UseStandard  bool
+	PrintCredits bool
+	Online       bool
 }

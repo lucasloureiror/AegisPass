@@ -13,29 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package shuffle
 
-import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
-)
-
-func main() {
-	var input cli.Input
-
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+// This function builds a string with CSPRNG using the original charset and the length of the password
+func BuildString(arr []byte, length int) string {
+	result := make([]byte, length)
+	for i := 0; i < length; i++ {
+		j := randomInt(len(arr))
+		result[i] = arr[j]
 	}
 
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
-
+	return string(result)
 }

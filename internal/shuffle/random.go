@@ -13,29 +13,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package shuffle
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
+	"crypto/rand"
+	"math/big"
 )
 
-func main() {
-	var input cli.Input
-
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
+func randomInt(max int) int {
+	maxBigInt := big.NewInt(int64(max))
+	val, err := rand.Int(rand.Reader, maxBigInt)
 	if err != nil {
-		output.PrintError(err.Error())
-		return
+		panic(err)
 	}
-
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
-
+	return int(val.Int64())
 }

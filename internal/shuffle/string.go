@@ -13,29 +13,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package shuffle
 
-import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
-)
+func String(pwd *string) {
 
-func main() {
-	var input cli.Input
+	pwdBytes := []byte(*pwd)
+	strSize := len(pwdBytes) - 1
 
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+	for i := strSize; i > 0; i-- {
+		j := randomInt(strSize)
+		pwdBytes[i], pwdBytes[j] = pwdBytes[j], pwdBytes[i]
 	}
 
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
+	*pwd = string(pwdBytes)
 
 }

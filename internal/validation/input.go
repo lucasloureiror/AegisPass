@@ -1,73 +1,76 @@
 /*
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
+Copyright 2024 lucasloureiror
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package validation
 
 import (
 	"errors"
-	"github.com/lucasloureiror/AegisPass/internal/config"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"os"
+	"flag"
 	"strconv"
+
+	"github.com/lucasloureiror/AegisPass/internal/cli"
+	"github.com/lucasloureiror/AegisPass/internal/output"
 )
 
-func Start(pwd *config.Password) {
-	var fetchErr error
-	flags(&pwd.Flags)
+func Start(input *cli.Input) error {
+	var err error
 
-	pwd.Size, fetchErr = fetchSize(&os.Args)
-	if fetchErr != nil {
-		os.Exit(2)
+	if input.Flags.NeedHelp {
+		return nil
 	}
 
-	sizeError := sizeCheck(pwd.Size)
-	if sizeError != nil {
-		os.Exit(2)
+	input.Size = fetchSize(flag.Arg(0))
+
+	err = sizeCheck(input.Size)
+	if err != nil {
+		return err
 	}
 
+	err = numberOfPasswordsCheck(input.NumberOfPasswords)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func sizeCheck(size int) error {
 
 	if size <= 3 || size > 35 {
-		err := errors.New("password size must be bigger than 3 and smaller than 35")
-		output.PrintError(err.Error())
-		return err
+		return errors.New("password size must be bigger than 3 and smaller than 35")
 
 	}
 	return nil
 }
 
-func fetchSize(args *[]string) (int, error) {
-
-	var convertErr error
-	var size int
-
-	if len(*args) < 2 || (*args)[1] == "" {
-		size = 10
-	} else {
-		size, convertErr = strconv.Atoi((*args)[1])
-	}
+func fetchSize(args string) int {
+	size, convertErr := strconv.Atoi(args)
 
 	if convertErr != nil {
-		warning := "Password length not detected, generating password with default length(10)"
-		size = 10
+		warning := "Password length not detected, generating password with default length(15), use flag --help for more details"
+		size = 15
 		output.PrintWarning(warning)
-		return size, nil
 	}
-
-	return size, nil
+	return size
 
 }
 
-func flags(flags *config.Flags) error {
-
-	if flags.NeedHelp {
-		output.PrintHelp()
-		return nil
+func numberOfPasswordsCheck(number int) error {
+	if number < 1 || number > 10 {
+		return errors.New("number of passwords must be bigger than 0 and smaller than 10")
 	}
-
 	return nil
 }

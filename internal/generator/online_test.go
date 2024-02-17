@@ -13,29 +13,33 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package generator
 
 import (
+	"github.com/lucasloureiror/AegisPass/internal/charsets"
 	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
+	"testing"
+	"unicode/utf8"
 )
 
-func main() {
-	var input cli.Input
-
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+func TestGenerateOnlinePassWithCorrectSize(t *testing.T) {
+	pwd := cli.Input{
+		Size: 8,
 	}
 
-	mode := generator.ReturnGeneratorMode(&input)
+	random := online{}
 
-	generator.Start(input, mode)
+	generator := passwordGenerator{
+		data: pwd,
+		mode: random,
+	}
 
+	charsets.Create(&generator.data)
+	password, _, _ := generator.mode.generate(&generator.data)
+
+	got := utf8.RuneCountInString(password)
+
+	if got != pwd.Size {
+		t.Errorf("GeneratePass received %d, but returned pass with size %d", 8, got)
+	}
 }

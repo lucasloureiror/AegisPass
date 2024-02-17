@@ -1,8 +1,18 @@
 /*
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
+Copyright 2024 lucasloureiror
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package randomclient
 
 import (
@@ -14,34 +24,35 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lucasloureiror/AegisPass/internal/config"
+	"github.com/lucasloureiror/AegisPass/internal/cli"
 	"github.com/lucasloureiror/AegisPass/internal/output"
 )
 
-func Start(pwd *config.Password) []string {
+func Start(input *cli.Input) ([]string, int, error) {
 	var err error
+	var credits int
 
 	client := &http.Client{}
 
-	pwd.APICredit, err = fetchAPICredits()
+	credits, err = fetchAPICredits()
 
 	if err != nil {
 		os.Exit(1)
 	}
-	response, error := fetchAPI(client, pwd)
+	response, error := fetchAPI(client, input)
 
 	if error != nil {
 		os.Exit(1)
 	}
 
-	return response
+	return response, credits, nil
 }
 
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
+func fetchAPI(client HTTPClient, pwd *cli.Input) ([]string, error) {
 
 	size := pwd.Size
 
@@ -56,7 +67,7 @@ func fetchAPI(client HTTPClient, pwd *config.Password) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "AegisPass github.com/lucasloureiror/AegisPass")
+	req.Header.Set("User-Agent", "AegisPass github.com/lucasloureiror/AegisPass v2")
 
 	response, responseError := client.Do(req)
 

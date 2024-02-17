@@ -13,29 +13,30 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package generator
 
 import (
+	"fmt"
+
 	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
 )
 
-func main() {
-	var input cli.Input
+type PasswordGeneratorStrategy interface {
+	generate(*cli.Input) (string, int, error) //Passing the model for a password ande slice of strings with api generated numbers.
+}
 
-	cli.ParseFlags(&input)
+type passwordGenerator struct {
+	mode      PasswordGeneratorStrategy
+	data      cli.Input
+	generated []string
+	credits   int
+}
 
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+func (pwd *passwordGenerator) print() {
+	if pwd.data.Flags.PrintCredits {
+		fmt.Println("API credits remaining:", fmt.Sprint(pwd.credits))
 	}
-
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
-
+	for _, password := range pwd.generated {
+		fmt.Println(password)
+	}
 }

@@ -16,7 +16,7 @@ AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Sit
 AegisPass is written in Go and is available for Linux, Windows, and macOS and it does not use anything out of the standard library and random.org, in the principle of no-trust.
 
 
-## Documentation 
+## Documentation
 
 You can check AegisPass official documentation [here](https://aegis.loureiro.tech) for more information about how to use AegisPass, why use AegisPass, how AegisPass works and more.
 
@@ -41,7 +41,7 @@ brew install lucasloureiror/tools/aegis
 ```
 
 To install AegisPass, you can use Go Install:
-  
+
   ```bash
   go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
   ```
@@ -90,32 +90,35 @@ After installing AegisPass, you can use it to generate random passwords. The fol
 Just run the executable with help to see the usage instructions:
 
 ```
-aegis help
+aegis --help
 ```
 
 
 The following help message will be displayed:
 
 ```
-Usage: aegis [password_length] [options]
+Usage: aegis [options] [password_length]
 
 Arguments:
-  password_length  The length of the password to be generated (default: 10)
+  password_length  The length of the password to be generated (default: 15)
 
 Options:
-  --numeric        Password with numbers only (default: password with length 10 if not specified)
+  --bulk 		   Specify the number of passwords to be generated (default: 1)
+  --numeric        Generate a numeric password
   --standard       Generate password with one upper case, one number and one special character at least.
-  --credits        Print random.org API credits to the user after generating a password
-  --help           Help the user to use the CLI tool
+  --online 	   	   Generate random or numeric passwords with random.org web service
+  --credits        Print random.org web service credits to the user after generating a password
+  --help           Print the help message to the user
 
 Example:
-  aegis 12 --numeric
+  aegis --numeric 12
   aegis 8
-  aegis 10 --standard
-  aegis 10 --credits
-  aegis help
+  aegis --standard 10
+  aegis --online 15
+  aegis --online --credits 10
+  aegis --help
 ```
 
 ## License
 
-This project is licensed under the Mozilla Public License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the APACHE LICENSE v2 - see the [LICENSE](LICENSE) file for details.

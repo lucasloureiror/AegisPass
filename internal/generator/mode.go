@@ -13,29 +13,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package generator
 
-import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
-)
+import "github.com/lucasloureiror/AegisPass/internal/cli"
 
-func main() {
-	var input cli.Input
+func ReturnGeneratorMode(data *cli.Input) PasswordGeneratorStrategy {
 
-	cli.ParseFlags(&input)
-
-	err := validation.Start(&input)
-
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+	if data.Flags.NeedHelp {
+		return help{}
 	}
 
-	mode := generator.ReturnGeneratorMode(&input)
+	if data.Flags.UseStandard {
+		return standard{}
+	}
 
-	generator.Start(input, mode)
+	if data.Flags.Online {
+		return online{}
+	}
+
+	return random{}
 
 }

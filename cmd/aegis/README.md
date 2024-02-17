@@ -7,37 +7,21 @@
 ![GitHub](https://img.shields.io/github/license/lucasloureiror/AegisPass)
 
 
-AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Site Reliability Engineers (SRE) to simplify the process of generating high quality random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org API to generate random passwords, providing enhanced security for your applications and services with to generate Randomness Mixing.
+
+AegisPass is a CLI tool designed for Software Engineers and DevOps Engineers/Site Reliability Engineers (SRE) to simplify the process of generating high quality random passwords across various platforms and operating systems. AegisPass uses cryptographically secure random numbers along with random.org to generate random passwords, providing enhanced security for your applications and services with to generate Randomness Mixing.
 
 AegisPass is written in Go and is available for Linux, Windows, and macOS and it does not use anything out of the standard library and random.org, in the principle of no-trust.
 
-## The Importance of True Random Passwords
 
-High quality random passwords provide a higher level of security compared to those generated using ordinary pseudo-random algorithms. Pseudo-random passwords are generated using deterministic algorithms, which means that if an attacker can determine the initial state of the algorithm or identify patterns in the sequence of generated numbers, they can predict the generated passwords. In contrast, high quality random passwords are generated from sources that are very hard to predict - if not impossible with current technology, such as cryptographically secure random numbers, making them more difficult for attackers to predict or guess based on the origin of the password.
+## Documentation
 
-Cryptographically secure random numbers are generated from sources like the operating system's entropy pool, which collects unpredictable data from various hardware and software events to produce high-quality random numbers. AegisPass leverages cryptographically secure random numbers along with the random.org website to generate random passwords.
-
-[Random Org](https://www.random.org/) is a reputable source of randomness, generating random numbers from atmospheric noise. Atmospheric noise is a natural source of randomness that is caused by natural electrical discharges, such as lightning, and radio waves from space. 
-
-Random.org captures this atmospheric noise through radio receivers and converts it into random numbers. This process ensures that the generated numbers are as random as possible and not influenced by any easily predictable patterns. By incorporating atmospheric noise-generated random numbers into AegisPass with Cryptographically secure random numbers, the software ensures a higher degree of unpredictability in the resulting passwords, making them more secure and robust against potential attacks.
-
-The process of randomness mixing, as employed by AegisPass, is also used by other systems like [Cloudflare LavaRand](https://blog.cloudflare.com/lavarand-in-production-the-nitty-gritty-technical-details/), which combines the chaotic patterns of lava lamps with other sources of randomness, such as cryptographically secure random numbers, to generate true random numbers. This further enhances the security and unpredictability of the generated passwords by incorporating multiple layers of randomness.
-
-## Password Generation Process
-
-The AegisPass password generation process involves two main steps to ensure the highest level of randomness:
-
-1. **Shuffling the characters**: AegisPass shuffles the set of 69 characters (digits, lowercase letters, and uppercase letters) using cryptographically secure random numbers from Go standard library. Cryptographically secure random numbers are generated from a non-deterministic source, such as the operating system's entropy pool. The OS entropy pool collects unpredictable data from various hardware events (e.g., keyboard presses, mouse movements) and software events (e.g., disk activity, network traffic) to produce high-quality random numbers. This ensures that the shuffled characters are as random as possible.
-
-2. **Fetching random.org Website**: AegisPass fetches `N` random numbers between `0` and `69` from the random.org API, where `N` represents the desired size of your password. These numbers are used to pick characters from the previously shuffled set of characters, creating a truly random password.
-
-By combining cryptographically secure random numbers and the random.org API, AegisPass generates high-quality random passwords that are difficult for attackers to predict or guess. Even if an attacker manages to obtain the random.org number generation, the combination of the two processes (cryptographically secure shuffling and random.org number fetching) makes it extremely difficult for them to predict your password.
+You can check AegisPass official documentation [here](https://aegis.loureiro.tech) for more information about how to use AegisPass, why use AegisPass, how AegisPass works and more.
 
 ## Features
 
 - Tailored for Software Engineers, DevOps Engineers, and SREs
-- Generates true random passwords
-- Uses random.org API for randomness
+- Generates true random passwords with randomness mixing
+- Uses random.org and cryptographically secure random numbers to generate passwords
 - Supports various platforms and operating systems
 - Easy-to-use command line interface
 
@@ -47,23 +31,23 @@ By combining cryptographically secure random numbers and the random.org API, Aeg
 
 ## Installation
 
-You can install AegisPass with [Homebrew](https://brew.sh/) on macOS and Linux:
+[Homebrew](https://brew.sh) is one of the quickest ways to install AegisPass on macOS and Linux and you can stay up to date with the latest version.
 
 ```bash
 brew install lucasloureiror/tools/aegis
 ```
 
-Or you can use Go Install:
+To install AegisPass, you can use Go Install:
 
-```bash
-go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
-```
+  ```bash
+  go install github.com/lucasloureiror/AegisPass/cmd/aegis@latest
+  ```
 
 If you don't have $GOPATH/bin in your PATH for your shell, don't forget to add:
 
-```bash
-export PATH=$PATH:$(go env GOPATH)/bin
-```
+  ```bash
+  export PATH=$PATH:$(go env GOPATH)/bin
+  ```
 
 You can also download the binary from the [releases page](www.github.com/lucasloureiror/AegisPass/releases) and add it to your PATH.
 
@@ -103,32 +87,35 @@ After installing AegisPass, you can use it to generate random passwords. The fol
 Just run the executable with help to see the usage instructions:
 
 ```
-aegis help
+aegis --help
 ```
 
 
 The following help message will be displayed:
 
 ```
-Usage: aegis [password_length] [options]
+Usage: aegis [options] [password_length]
 
 Arguments:
-  password_length  The length of the password to be generated (default: 10)
+  password_length  The length of the password to be generated (default: 15)
 
 Options:
-  --numeric        Password with numbers only (default: password with length 10 if not specified)
+  --bulk 		   Specify the number of passwords to be generated (default: 1)
+  --numeric        Generate a numeric password
   --standard       Generate password with one upper case, one number and one special character at least.
-  --credits        Print random.org API credits to the user after generating a password
-  --help           Help the user to use the CLI tool
+  --online 	   	   Generate random or numeric passwords with random.org web service
+  --credits        Print random.org web service credits to the user after generating a password
+  --help           Print the help message to the user
 
 Example:
-  aegis 12 --numeric
+  aegis --numeric 12
   aegis 8
-  aegis 10 --standard
-  aegis 10 --credits
-  aegis help
+  aegis --standard 10
+  aegis --online 15
+  aegis --online --credits 10
+  aegis --help
 ```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the APACHE LICENSE v2 - see the [LICENSE](LICENSE) file for details.

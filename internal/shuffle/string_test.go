@@ -13,29 +13,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package shuffle
 
 import (
-	"github.com/lucasloureiror/AegisPass/internal/cli"
-	"github.com/lucasloureiror/AegisPass/internal/generator"
-	"github.com/lucasloureiror/AegisPass/internal/output"
-	"github.com/lucasloureiror/AegisPass/internal/validation"
+	"testing"
 )
 
-func main() {
-	var input cli.Input
+func TestShuffleString(t *testing.T) {
 
-	cli.ParseFlags(&input)
+	original := "TestString1235)!@#"
 
-	err := validation.Start(&input)
+	shuffled := original
 
-	if err != nil {
-		output.PrintError(err.Error())
-		return
+	String(&shuffled)
+
+	if original == shuffled {
+		t.Error("Original string was: ", original, "Shuffled string was: ", shuffled, "Strings are equal, they shouldn't be.")
 	}
-
-	mode := generator.ReturnGeneratorMode(&input)
-
-	generator.Start(input, mode)
 
 }
