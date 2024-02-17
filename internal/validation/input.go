@@ -50,7 +50,7 @@ func fetchSize(args string) int {
 	size, convertErr := strconv.Atoi(args)
 
 	if convertErr != nil {
-		warning := "Password length not detected, generating password with default length(15)"
+		warning := "Password length not detected, generating password with default length(15), use flag --help for more details"
 		size = 15
 		output.PrintWarning(warning)
 	}
