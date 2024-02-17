@@ -8,7 +8,7 @@ aegis --help
 
 ## Modes
 
-> Flags should come after the length of the password, support for flags before the length of the password is to be implemented.
+> Flags should come before the length of the password.
 
 1.**Rapid Fire:** Generate a quick password with random mode with default length of 15 characters.
 
