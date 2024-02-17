@@ -7,7 +7,7 @@ import (
 	"unicode/utf8"
 )
 
-func TestGenerateRandomPassWithCorrectSize(t *testing.T) {
+func TestGenerateOnlinePassWithCorrectSize(t *testing.T) {
 	pwd := cli.Input{
 		Size: 8,
 	}

@@ -13,7 +13,7 @@ import (
 	"github.com/lucasloureiror/AegisPass/internal/cli"
 )
 
-func TestGenerateOfflinePassWithCorrectSize(t *testing.T) {
+func TestGenerateRandomPassWithCorrectSize(t *testing.T) {
 	pwd := cli.Input{
 		Size: 7,
 	}
