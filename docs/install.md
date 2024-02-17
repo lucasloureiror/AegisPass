@@ -9,8 +9,7 @@
 brew install lucasloureiror/tools/aegis
 ```
 
-
-## Go builtin install
+## Go builtin install command
 
 If you have Go installed, you can use the following command to install AegisPass:
 
@@ -55,4 +54,3 @@ make build
 ```
 
 This will compile the AegisPass project and create an executable binary in the `build/bin` folder called aegis.exe. Add to your path to use it globally.
-

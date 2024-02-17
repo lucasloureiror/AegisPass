@@ -1,5 +1,5 @@
 /*
-Copyright 2024 github.com/lucasloureiror/AegisPass maintainers
+Copyright 2024 lucasloureiror
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ type help struct{}
 func (h help) generate(pwd *cli.Input) (string, int, error) {
 	helpMessage := `
 AegisPass v2.0.0
-AegisPass source code is licensed under the Mozilla Public License 2.0 and is available at github.com/lucasloureiror/AegisPass
 Usage: aegis [options] [password_length]
 
 Arguments:
