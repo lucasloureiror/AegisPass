@@ -10,9 +10,9 @@ import (
 )
 
 func PrintError(err string) {
-	fmt.Println("Error: ", err)
+	fmt.Println("Error:", err)
 }
 
 func PrintWarning(warn string) {
-	fmt.Println("Warning: ", warn)
+	fmt.Println("Warning:", warn)
 }
